@@ -1,4 +1,4 @@
-# Copyright (c) 2022 PAL Robotics S.L. All rights reserved.
+# Copyright (c) 2023 PAL Robotics S.L. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,6 +39,10 @@ def declare_args(context, *args, **kwargs):
         'use_sim_time', default_value='False',
         description='Use simulation time')
 
+    base_type_arg = DeclareLaunchArgument(
+        'base_type', default_value='pmb2',
+        description='Base type')
+
     robot_name = read_launch_argument('robot_name', context)
 
     return [get_arm(robot_name),
@@ -47,7 +51,8 @@ def declare_args(context, *args, **kwargs):
             get_ft_sensor(robot_name),
             get_laser_model(robot_name),
             get_wrist_model(robot_name),
-            sim_time_arg]
+            sim_time_arg,
+            base_type_arg]
 
 
 def launch_setup(context, *args, **kwargs):
@@ -63,6 +68,7 @@ def launch_setup(context, *args, **kwargs):
             'laser_model': read_launch_argument('laser_model', context),
             'wrist_model': read_launch_argument('wrist_model', context),
             'use_sim': read_launch_argument('use_sim_time', context),
+            'base_type': read_launch_argument('base_type', context),
         }
     )}
 
@@ -70,6 +76,7 @@ def launch_setup(context, *args, **kwargs):
                executable='robot_state_publisher',
                output='both',
                parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')},
+                           {'base_type': LaunchConfiguration('base_type')},
                            robot_description])
 
     return [rsp]
