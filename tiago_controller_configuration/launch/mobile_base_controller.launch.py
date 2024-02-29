@@ -1,4 +1,4 @@
-# Copyright (c) 2022 PAL Robotics S.L. All rights reserved.
+# Copyright (c) 2024 PAL Robotics S.L. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,14 +17,12 @@ import os
 from ament_index_python.packages import get_package_share_directory
 
 from controller_manager.launch_utils import generate_load_controller_launch_description
-from launch_pal.param_utils import merge_param_files
 from launch import LaunchDescription
 from launch.substitutions import LaunchConfiguration
 from launch.actions import DeclareLaunchArgument, OpaqueFunction
 
 
 def controller_bringup(context, *args, **kwargs):
-
     actions = []
     is_public_sim = LaunchConfiguration('is_public_sim').perform(context)
 
@@ -36,18 +34,10 @@ def controller_bringup(context, *args, **kwargs):
         default_config = os.path.join(
             get_package_share_directory('tiago_controller_configuration'),
             'config', 'mobile_base_controller.yaml')
-
-    calibration_config = '/etc/calibration/master_calibration.yaml'
-
-    if os.path.exists(calibration_config):
-        params_file = merge_param_files([default_config, calibration_config])
-    else:
-        params_file = default_config
-
     load_controller_arg = generate_load_controller_launch_description(
         controller_name='mobile_base_controller',
-        controller_type='diff_drive_controller/DiffDriveController',
-        controller_params_file=params_file)
+        controller_type='omni_drive_controller/OmniDriveController',
+        controller_params_file=os.path.join(
 
     actions.append(load_controller_arg)
     return actions
