@@ -41,7 +41,7 @@ def controller_bringup(context, *args, **kwargs):
 def setup_controller_configuration(context: LaunchContext):
     actions = []
     base_type = read_launch_argument('base_type', context)
-    if base_type == "omni_base":
+    if base_type == 'omni_base':
         launch_controller = generate_load_controller_launch_description(
           controller_name="mobile_base_controller",
           controller_type='omni_drive_controller/OmniDriveController',
