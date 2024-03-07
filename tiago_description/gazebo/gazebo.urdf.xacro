@@ -27,10 +27,6 @@
         <!-- Do something about multirobot -->
       </xacro:unless>
     </plugin>
-  
-    <xacro:if value="${base_type not in ['pmb2', 'omni_base']}">
-    <xacro:wrong_base_type/>
-    </xacro:if>
 
     <xacro:if value="${base_type == 'omni_base'}">
       <plugin name="gazebo_ros_planar_move" filename="libgazebo_ros_planar_move.so">
