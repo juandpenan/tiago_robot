@@ -19,14 +19,15 @@ from controller_manager.launch_utils import generate_load_controller_launch_desc
 from launch import LaunchDescription
 from launch.substitutions import LaunchConfiguration
 from launch.actions import DeclareLaunchArgument, OpaqueFunction
-from launch.substitutions import LaunchConfiguration
 from launch import LaunchDescription, LaunchContext
+from launch_pal.param_utils import merge_param_files
 from dataclasses import dataclass
 
 
 def controller_bringup(context, *args, **kwargs):
     actions = []
     is_public_sim = LaunchConfiguration('is_public_sim').perform(context)
+
 
     if is_public_sim == 'True' or is_public_sim == 'true':
         default_config = os.path.join(
@@ -37,6 +38,7 @@ def controller_bringup(context, *args, **kwargs):
             get_package_share_directory('tiago_controller_configuration'),
             'config', 'mobile_base_controller.yaml')
     load_controller_arg = generate_load_controller_launch_description(
+
 
 def setup_controller_configuration(context: LaunchContext):
     actions = []
