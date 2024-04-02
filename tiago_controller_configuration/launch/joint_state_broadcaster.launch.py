@@ -20,16 +20,13 @@ from launch_pal.arg_utils import LaunchArgumentsBase, read_launch_argument
 from launch.actions import DeclareLaunchArgument, OpaqueFunction
 from launch import LaunchDescription, LaunchContext
 from dataclasses import dataclass
+from launch_pal.robot_arguments import TiagoArgs
 
 
 @dataclass(frozen=True)
 class LaunchArguments(LaunchArgumentsBase):
 
-    base_type: DeclareLaunchArgument = DeclareLaunchArgument(
-        name='base_type',
-        default_value='pmb2',
-        choices=['pmb2', 'omni_base'],
-        description='Type of base_type [pmb2, omni_base]')
+    base_type: DeclareLaunchArgument = TiagoArgs.base_type
 
 
 def declare_actions(launch_description: LaunchDescription, launch_args: LaunchArguments):

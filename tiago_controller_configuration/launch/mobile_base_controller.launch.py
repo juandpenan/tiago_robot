@@ -22,6 +22,7 @@ from launch.actions import DeclareLaunchArgument, OpaqueFunction
 from launch import LaunchDescription, LaunchContext
 from launch_pal.param_utils import merge_param_files
 from dataclasses import dataclass
+from launch_pal.robot_arguments import TiagoArgs
 
 
 def controller_bringup(context, *args, **kwargs):
