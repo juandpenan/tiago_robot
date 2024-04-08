@@ -15,7 +15,7 @@
 import os
 
 from ament_index_python.packages import get_package_share_directory
-from controller_manager.launch_utils import generate_load_controller_launch_description
+from controller_manager.launch_utils import (
 from launch import LaunchDescription
 from launch.substitutions import LaunchConfiguration
 from launch.actions import DeclareLaunchArgument, OpaqueFunction
@@ -29,7 +29,7 @@ def controller_bringup(context, *args, **kwargs):
     actions = []
     is_public_sim = LaunchConfiguration('is_public_sim').perform(context)
 
-
+    def __init__(self):
     if is_public_sim == 'True' or is_public_sim == 'true':
         default_config = os.path.join(
             get_package_share_directory('tiago_controller_configuration'),
@@ -41,18 +41,24 @@ def controller_bringup(context, *args, **kwargs):
     load_controller_arg = generate_load_controller_launch_description(
 
 
-def setup_controller_configuration(context: LaunchContext):
-    actions = []
-    base_type = read_launch_argument('base_type', context)
-    if base_type == 'omni_base':
-        launch_controller = generate_load_controller_launch_description(
-          controller_name="mobile_base_controller",
-          controller_type='omni_drive_controller/OmniDriveController',
-          controller_params_file=os.path.join(
+class Pmb2Controller(BaseController):
+    def __init__(self):
+        controller_type = 'diff_drive_controller/DiffDriveController'
 
     actions.append(load_controller_arg)
     return actions
+        )
+        params_file = (
+            merge_param_files([default_config, calibration_config])
+            if os.path.exists(calibration_config)
+            else default_config
+        )
+        super().__init__(controller_type, params_file)
 
+
+@dataclass(frozen=True)
+class LaunchArguments(LaunchArgumentsBase):
+    base_type: DeclareLaunchArgument = TiagoArgs.base_type
 
 def generate_launch_description():
 
@@ -68,21 +74,25 @@ def generate_launch_description():
     ld.add_action(controller_bringup_launch)
 
     return ld
-            controller_type='diff_drive_controller/DiffDriveController',
-            controller_params_file=params_file)
-        actions.append(launch_controller)
-        return actions
+    return [launch_controller]
+
+
+def setup_controller_configuration_by_type(context: LaunchContext):
+    base_controller_mapping = {
+        'omni_base': OmniBaseController(),
+        'pmb2': Pmb2Controller()
+    }
+    base_type = read_launch_argument('base_type', context)
+    controller_info = (base_controller_mapping.
+                       get(base_type,
+                           base_controller_mapping[base_type]))
+    return setup_controller_configuration(controller_info.controller_type,
+                                          controller_info.params_file)
 
 
 def generate_launch_description():
-
-    # Create the launch description and populate
     ld = LaunchDescription()
-
     launch_arguments = LaunchArguments()
-
     launch_arguments.add_to_launch_description(ld)
-
     declare_actions(ld, launch_arguments)
-
     return ld

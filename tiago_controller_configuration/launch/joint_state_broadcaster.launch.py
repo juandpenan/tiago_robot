@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import os
+from typing import Dict
 
 from ament_index_python.packages import get_package_share_directory
 from controller_manager.launch_utils import generate_load_controller_launch_description
@@ -25,43 +26,37 @@ from launch_pal.robot_arguments import TiagoArgs
 
 @dataclass(frozen=True)
 class LaunchArguments(LaunchArgumentsBase):
-
     base_type: DeclareLaunchArgument = TiagoArgs.base_type
 
 
-def declare_actions(launch_description: LaunchDescription, launch_args: LaunchArguments):
-
-    launch_description.add_action(OpaqueFunction(function=setup_controller_configuration))
+def declare_actions(launch_description: LaunchDescription,
+                    launch_args: LaunchArguments):
+    launch_description.add_action(OpaqueFunction(
+                                    function=setup_controller_configuration))
     return
 
 
 def setup_controller_configuration(context: LaunchContext):
-
     actions = []
+    controllers_config: Dict[str, str] = {
+        'omni_base': 'omni_base_controller_configuration',
+        'pmb2': 'tiago_controller_configuration'
+    }
     base_type = read_launch_argument('base_type', context)
-    if base_type == 'omni_base':
-        launch_controller = generate_load_controller_launch_description(
-            controller_name='joint_state_broadcaster',
-            controller_type='joint_state_broadcaster/JointStateBroadcaster',
-            controller_params_file=os.path.join(
-                get_package_share_directory('omni_base_controller_configuration'),
-                'config', 'joint_state_broadcaster.yaml'))
-        actions.append(launch_controller)
-    else:
-        launch_controller = generate_load_controller_launch_description(
-            controller_name='joint_state_broadcaster',
-            controller_type='joint_state_broadcaster/JointStateBroadcaster',
-            controller_params_file=os.path.join(
-                get_package_share_directory('tiago_controller_configuration'),
-                'config', 'joint_state_broadcaster.yaml')
-        )
-        actions.append(launch_controller)
+    controller_config_package = (controllers_config.get(base_type))
+    launch_controller = generate_load_controller_launch_description(
+        controller_name='joint_state_broadcaster',
+        controller_type='joint_state_broadcaster/JointStateBroadcaster',
+        controller_params_file=os.path.join(
+            get_package_share_directory(controller_config_package),
+            'config', 'joint_state_broadcaster.yaml')
+    )
+    actions.append(launch_controller)
 
     return actions
 
 
 def generate_launch_description():
-
     # Create the launch description and populate
     ld = LaunchDescription()
 
