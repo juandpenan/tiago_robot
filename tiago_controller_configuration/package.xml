@@ -26,6 +26,8 @@
   <exec_depend>pal_gripper_controller_configuration</exec_depend>
   <exec_depend>pal_hey5_controller_configuration</exec_depend>
   <exec_depend>pal_robotiq_controller_configuration</exec_depend>
+  <exec_depend>ros2controlcli</exec_depend>
+
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 
