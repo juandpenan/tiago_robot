@@ -2,8 +2,8 @@
 Changelog for package tiago_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.2.6 (2024-04-16)
+------------------
 * Merge branch 'feat/ros2-pipelines' into 'humble-devel'
   added public sim config for mobile base controller
   See merge request robots/tiago_robot!274
