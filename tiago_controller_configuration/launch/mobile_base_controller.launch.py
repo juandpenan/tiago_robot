@@ -34,7 +34,7 @@ class BaseController:
 
 
 class Omni(BaseController):
-    def __init__(self, is_public_sim):     
+    def __init__(self, is_public_sim):
         controller_type = 'omni_drive_controller/OmniDriveController'
         params_file = os.path.join(
             get_package_share_directory('omni_base_controller_configuration'),
