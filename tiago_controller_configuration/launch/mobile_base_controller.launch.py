@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import os
-
 from ament_index_python.packages import get_package_share_directory
 from controller_manager.launch_utils import (
     generate_load_controller_launch_description)
@@ -25,20 +24,26 @@ from dataclasses import dataclass
 from launch_pal.robot_arguments import TiagoArgs
 
 
-class Base:
+class BaseController:
     def __init__(self, controller_type, params_file):
         self.controller_type = controller_type
         self.params_file = params_file
 
-    def generate_controller_launch_description(self):
-        return generate_load_controller_launch_description(
-            controller_name='mobile_base_controller',
-            controller_type=self.controller_type,
-            controller_params_file=self.params_file
+    def get_controller_info(self):
+        return self.controller_type, self.params_file
+
+
+class Omni(BaseController):
+    def __init__(self, is_public_sim):
+        controller_type = 'omni_drive_controller/OmniDriveController'
+        params_file = os.path.join(
+            get_package_share_directory('omni_base_controller_configuration'),
+            'config', 'mobile_base_controller.yaml'
         )
+        super().__init__(controller_type, params_file)
 
 
-class Pmb2(Base):
+class Pmb2(BaseController):
     def __init__(self, is_public_sim):
         controller_type = 'diff_drive_controller/DiffDriveController'
         if is_public_sim == 'True' or is_public_sim == 'true':
@@ -61,27 +66,17 @@ class Pmb2(Base):
         super().__init__(controller_type, params_file)
 
 
-class Omni(Base):
-    def __init__(self):
-        controller_type = 'omni_drive_controller/OmniDriveController'
-        params_file = os.path.join(
-            get_package_share_directory('omni_base_controller_configuration',
-                                        'config',
-                                        'mobile_base_controller.yaml'))
-        super().__init__(controller_type, params_file)
-
-
 class ControllerFactory:
 
-    CONTROLLER_MAPPINGS = {
-        'omni_base': Omni(),
-        'pmb2': Pmb2(),
+    CONTROLLER_MAPPING = {
+        'omni_base': Omni,
+        'pmb2': Pmb2,
     }
 
     @staticmethod
-    def create_base(base_type: str, is_public_sim):
+    def create_controller(base_type: str, is_public_sim: str):
         controller_class = ControllerFactory.CONTROLLER_MAPPING.get(base_type)
-        if controller_class:
+        if (controller_class):
             return controller_class(is_public_sim)
         else:
             raise ValueError(f"Unknown base type: {base_type}")
@@ -96,17 +91,33 @@ class LaunchArguments(LaunchArgumentsBase):
         description='Whether or not you are using a public simulation')
 
 
-def setup_controller_configuration_with_context(context: LaunchContext):
-    base_type = read_launch_argument('base_type', context)
-    is_public_sim = read_launch_argument('is_public_sim', context)
-    controller = ControllerFactory.create_controller(base_type, is_public_sim)
-    return controller.generate_controller_launch_description()
-
-
 def declare_actions(launch_description: LaunchDescription,
                     launch_args: LaunchArguments):
     launch_description.add_action(
-        OpaqueFunction(function=setup_controller_configuration_with_context))
+        OpaqueFunction(function=setup_controller_configuration_by_type))
+
+
+def setup_controller_configuration(controller_type: str,
+                                   params_file: str):
+
+    launch_controller = generate_load_controller_launch_description(
+        controller_name='mobile_base_controller',
+        controller_type=controller_type,
+        controller_params_file=params_file
+    )
+    return [launch_controller]
+
+
+def setup_controller_configuration_by_type(context: LaunchContext):
+    base_type = read_launch_argument('base_type', context)
+    is_public_sim = read_launch_argument('is_public_sim', context)
+
+    controller = ControllerFactory.create_controller(base_type,
+                                                     is_public_sim)
+    controller_info = controller.get_controller_info()
+    controller_type, params_file = controller_info
+    return setup_controller_configuration(controller_type,
+                                          params_file)
 
 
 def generate_launch_description():
