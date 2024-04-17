@@ -34,7 +34,7 @@ class BaseController:
 
 
 class Omni(BaseController):
-    def __init__(self, is_public_sim):
+    def __init__(self, is_public_sim):     
         controller_type = 'omni_drive_controller/OmniDriveController'
         params_file = os.path.join(
             get_package_share_directory('omni_base_controller_configuration'),
@@ -85,10 +85,10 @@ class ControllerFactory:
 @dataclass(frozen=True)
 class LaunchArguments(LaunchArgumentsBase):
     base_type: DeclareLaunchArgument = TiagoArgs.base_type
-    is_public_sim = DeclareLaunchArgument(
-        'is_public_sim',
+    use_sim_time: DeclareLaunchArgument = DeclareLaunchArgument(
+        name='is_public_sim',
         default_value='False',
-        description='Whether or not you are using a public simulation')
+        description='Use public simulation')
 
 
 def declare_actions(launch_description: LaunchDescription,
@@ -111,7 +111,6 @@ def setup_controller_configuration(controller_type: str,
 def setup_controller_configuration_by_type(context: LaunchContext):
     base_type = read_launch_argument('base_type', context)
     is_public_sim = read_launch_argument('is_public_sim', context)
-
     controller = ControllerFactory.create_controller(base_type,
                                                      is_public_sim)
     controller_info = controller.get_controller_info()
