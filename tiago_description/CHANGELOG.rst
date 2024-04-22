@@ -2,6 +2,26 @@
 Changelog for package tiago_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'sgg/feat/base_type_omni_base' into 'humble-devel'
+  Sgg/feat/base type omni base
+  See merge request robots/tiago_robot!273
+* Update new robot argument method
+  Update new robot argument
+  Update new robot argument
+  Remove blank lines
+* Launch joint_state_broadcaster depending on the base_type
+  Fix syntax
+  Remove redundant check
+  Remove redundant check
+* Disable depency for humble
+* Add omni-directional gazebo drive
+* Parameterized wheel details based on base type
+* Add omni_base_description package
+* Add base_type parameter
+* Contributors: Sergi Garcia, davidterkuile
+
 4.2.6 (2024-04-16)
 ------------------
 

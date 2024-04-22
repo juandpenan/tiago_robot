@@ -2,6 +2,31 @@
 Changelog for package tiago_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'sgg/feat/base_type_omni_base' into 'humble-devel'
+  Sgg/feat/base type omni base
+  See merge request robots/tiago_robot!273
+* Fix whitespace
+* mobile_base_controller.launch.py
+  Handle is_public_sim
+* Add param to ctor
+* Add use_sim parameter
+* Refactor avoiding if to reduce code complexity
+* Update new robot argument method
+  Update new robot argument
+  Update new robot argument
+  Remove blank lines
+* Launch joint_state_broadcaster depending on the base_type
+  Fix syntax
+  Remove redundant check
+  Remove redundant check
+* Fix syntax
+* Fix quotes in comparison
+* Parameterized mobile base type
+* Hardcoded omni_base controller
+* Contributors: Sergi Garcia, davidterkuile
+
 4.2.6 (2024-04-16)
 ------------------
 * Merge branch 'feat/ros2-pipelines' into 'humble-devel'
