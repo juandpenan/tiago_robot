@@ -21,32 +21,28 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, OpaqueFunction, SetLaunchConfiguration
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterValue
 from launch_param_builder import load_xacro
 from launch_pal.arg_utils import read_launch_argument
 from launch_pal.arg_utils import LaunchArgumentsBase
 from dataclasses import dataclass
 from launch_pal.robot_arguments import TiagoArgs
+from launch_pal.arg_utils import CommonArgs
 
 
 @dataclass(frozen=True)
 class LaunchArguments(LaunchArgumentsBase):
 
     base_type: DeclareLaunchArgument = TiagoArgs.base_type
+    arm_type: DeclareLaunchArgument = TiagoArgs.arm_type
     end_effector: DeclareLaunchArgument = TiagoArgs.end_effector
     ft_sensor: DeclareLaunchArgument = TiagoArgs.ft_sensor
     wrist_model: DeclareLaunchArgument = TiagoArgs.wrist_model
     camera_model: DeclareLaunchArgument = TiagoArgs.camera_model
     laser_model: DeclareLaunchArgument = TiagoArgs.laser_model
-    has_screen: DeclareLaunchArgument = TiagoArgs.has_screen
 
-    use_sim_time: DeclareLaunchArgument = DeclareLaunchArgument(
-        name='use_sim_time',
-        default_value='False',
-        description='Use simulation time')
-    namespace: DeclareLaunchArgument = DeclareLaunchArgument(
-        name='namespace',
-        default_value='',
-        description='Define namespace of the robot. ')
+    use_sim_time: DeclareLaunchArgument = CommonArgs.use_sim_time
+    namespace: DeclareLaunchArgument = CommonArgs.namespace
 
 
 def generate_launch_description():
@@ -62,17 +58,27 @@ def generate_launch_description():
     return ld
 
 
-def declare_actions(launch_description: LaunchDescription, launch_args: LaunchArguments):
+def declare_actions(
+    launch_description: LaunchDescription, launch_args: LaunchArguments
+):
+    launch_description.add_action(
+        OpaqueFunction(function=create_robot_description_param)
+    )
 
-    launch_description.add_action(OpaqueFunction(
-        function=create_robot_description_param))
-
-    rsp = Node(package='robot_state_publisher',
-               executable='robot_state_publisher',
-               output='both',
-               parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')},
-                           {'base_type': LaunchConfiguration('base_type')},
-                           {'robot_description': LaunchConfiguration('robot_description')}])
+    # Using ParameterValue is needed so ROS knows the parameter type
+    # Otherwise https://github.com/ros2/launch_ros/issues/136
+    rsp = Node(
+        package="robot_state_publisher",
+        executable="robot_state_publisher",
+        output="both",
+        parameters=[
+            {
+                "robot_description": ParameterValue(
+                    LaunchConfiguration("robot_description"), value_type=str
+                )
+            }
+        ],
+    )
 
     launch_description.add_action(rsp)
 
@@ -81,21 +87,25 @@ def declare_actions(launch_description: LaunchDescription, launch_args: LaunchAr
 
 def create_robot_description_param(context, *args, **kwargs):
 
-    xacro_file_path = Path(os.path.join(
-        get_package_share_directory('tiago_description'),
-        'robots', 'tiago.urdf.xacro'))
+    xacro_file_path = Path(
+        os.path.join(
+            get_package_share_directory("tiago_description"),
+            "robots",
+            "tiago.urdf.xacro",
+        )
+    )
 
     xacro_input_args = {
-        'camera_model': read_launch_argument('camera_model', context),
-        'end_effector': read_launch_argument('end_effector', context),
-        'ft_sensor': read_launch_argument('ft_sensor', context),
-        'laser_model': read_launch_argument('laser_model', context),
-        'wrist_model': read_launch_argument('wrist_model', context),
-        'has_screen': read_launch_argument('has_screen', context),
-        'base_type': read_launch_argument('base_type', context),
-        'use_sim': read_launch_argument('use_sim_time', context),
-        'namespace': read_launch_argument('namespace', context),
+        "arm_model": read_launch_argument("arm_type", context),
+        "camera_model": read_launch_argument("camera_model", context),
+        "end_effector": read_launch_argument("end_effector", context),
+        "ft_sensor": read_launch_argument("ft_sensor", context),
+        "laser_model": read_launch_argument("laser_model", context),
+        "wrist_model": read_launch_argument("wrist_model", context),
+        "base_type": read_launch_argument("base_type", context),
+        "use_sim": read_launch_argument("use_sim_time", context),
+        "namespace": read_launch_argument("namespace", context),
     }
     robot_description = load_xacro(xacro_file_path, xacro_input_args)
 
-    return [SetLaunchConfiguration('robot_description', robot_description)]
+    return [SetLaunchConfiguration("robot_description", robot_description)]
