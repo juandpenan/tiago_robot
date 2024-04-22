@@ -2,8 +2,8 @@
 Changelog for package tiago_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.2.7 (2024-04-22)
+------------------
 * Merge branch 'sgg/feat/base_type_omni_base' into 'humble-devel'
   Sgg/feat/base type omni base
   See merge request robots/tiago_robot!273
