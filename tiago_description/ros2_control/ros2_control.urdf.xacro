@@ -26,7 +26,7 @@
     <xacro:property name="has_arm" value="${arm != 'no-arm'}" />
     <xacro:property name="end_effector" value="$(arg end_effector)" />
 
-    <xacro:include filename="$(find pmb2_description)/urdf/wheels/wheel.ros2_control.xacro" />
+    <xacro:include filename="$(find ${base_type}_description)/urdf/wheels/wheel.ros2_control.xacro" />
     <xacro:include filename="$(find tiago_description)/urdf/torso/torso.ros2_control.xacro" />
     <xacro:include filename="$(find tiago_description)/urdf/head/head.ros2_control.xacro" />
 
@@ -44,7 +44,7 @@
         <xacro:include filename="$(find pal_robotiq_description)/urdf/robotiq.ros2_control.xacro" />
       </xacro:if>
     </xacro:if>
-    <xacro:include filename="$(find pmb2_description)/urdf/sensors/sensors.ros2_control.xacro"/>
+    <xacro:include filename="$(find ${base_type}_description)/urdf/sensors/sensors.ros2_control.xacro"/>
 
 
     <!-- calibration offsets -->
@@ -58,12 +58,19 @@
         <xacro:unless value="$(arg use_sim)">
           <plugin>robot_control/RobotControl</plugin>
         </xacro:unless>
-
       </hardware>
 
       <!-- wheels -->
-      <xacro:ros2_control_wheel side="right" />
-      <xacro:ros2_control_wheel side="left" />
+      <xacro:if value="${base_type == 'pmb2'}">
+        <xacro:ros2_control_wheel side="right" />
+        <xacro:ros2_control_wheel side="left" />
+      </xacro:if>
+      <xacro:if value="${base_type == 'omni_base'}">
+	<xacro:ros2_control_wheel side="front_right" />
+	<xacro:ros2_control_wheel side="front_left" />
+	<xacro:ros2_control_wheel side="rear_right" />
+	<xacro:ros2_control_wheel side="rear_left" />
+      </xacro:if>
 
       <!-- IMU -->
       <xacro:if value="$(arg use_sim)">
