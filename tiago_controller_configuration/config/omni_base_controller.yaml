@@ -1,26 +1,27 @@
 mobile_base_controller:
   ros__parameters:
+    type: omni_drive_controller/OmniDriveController
     use_stamped_vel: False
-    left_wheel_names  : ['wheel_left_joint']
-    right_wheel_names : ['wheel_right_joint']
+    left_front_wheel  : 'wheel_front_left_joint'
+    left_back_wheel  : 'wheel_rear_left_joint'
+    right_front_wheel : 'wheel_front_right_joint'
+    right_back_wheel : 'wheel_rear_right_joint'
 
     # In ROS1 these physical properties were parsed from the URDF
-    wheel_radius: 0.0985
-    wheel_separation: 0.4044
+    wheel_radius: 0.0762
+    wheel_separation: 0.44715
+    axis_separation: 0.488
 
+    # @TODO: if wheel odometry is calibrated; these parameters should be in a separate yaml
     wheel_separation_multiplier: 1.0
-    left_wheel_radius_multiplier: 1.0
-    right_wheel_radius_multiplier: 1.0
+    wheel_radius_multiplier: 1.0
+    axis_separation_multiplier: 1.0
 
     # The params below were used in ROS1 but not yet in ROS2
-    
+
     publish_rate: 50.0
     pose_covariance_diagonal : [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
     twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
-
-    enable_pose_covariance_update: true
-    error_constant_left : 0.001
-    error_constant_right: 0.001
 
     # Velocity commands timeout [s]
     cmd_vel_timeout: 0.25
@@ -31,14 +32,11 @@ mobile_base_controller:
     # odom tf will be published by direct laser odometry
     enable_odom_tf: false
 
-    # Preserve turning radius when limiting speed/acceleration/jerk
-    preserve_turning_radius: true
+    # Odom frame_id
+    odom_frame_id: odom
 
     # Publish limited velocity
-    publish_cmd: true
-
-    # Publish wheel data
-    publish_wheel_data: true
+    publish_limited_velocity: true
 
     # Velocity and acceleration limits
     # Whenever a min_* is unspecified, default to -max_*
@@ -46,7 +44,15 @@ mobile_base_controller:
       x:
         has_velocity_limits    : true
         max_velocity           :  1.0 # m/s
-        min_velocity           : -0.2 # m/s
+        min_velocity           : -1.0 # m/s
+        has_acceleration_limits: true
+        max_acceleration       :  1.0 # m/s^2
+        has_jerk_limits        : false
+        max_jerk               :  5.0 # m/s^3
+      y:
+        has_velocity_limits    : true
+        max_velocity           :  1.0 # m/s
+        min_velocity           : -1.0 # m/s
         has_acceleration_limits: true
         max_acceleration       :  1.0 # m/s^2
         has_jerk_limits        : false
@@ -54,9 +60,17 @@ mobile_base_controller:
     angular:
       z:
         has_velocity_limits    : true
-        max_velocity           : 2.09 # 120.0º
+        max_velocity           : 2.09 # 120.0º reduce pendulum effect
         has_acceleration_limits: true
         max_acceleration       : 2.09 # 120.0º
         has_jerk_limits        : false
         max_jerk               : 10.47 # 600.0º
-
+    space:
+      xy:
+        max_velocity           : 0.7
+      xz:
+        max_velocity           : 0.5
+      yz:
+        max_velocity           : 0.5
+      xyz:
+        max_velocity           : 0.4
