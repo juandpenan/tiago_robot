@@ -183,7 +183,7 @@
   <xacro:if value="${has_arm}">
 
     <!-- Arm -->
-    <xacro:tiago_arm name="arm" parent="torso_lift_link" wrist_model="${wrist_model}" has_ft_sensor="${has_ft_sensor}" reflect="1" tiago_dual="-1" arm_1_offset="${arm_1_joint_offset}" arm_2_offset="${arm_2_joint_offset}" arm_3_offset="${arm_3_joint_offset}" arm_4_offset="${arm_4_joint_offset}" arm_5_offset="${arm_5_joint_offset}" arm_6_offset="${arm_6_joint_offset}" arm_7_offset="${arm_7_joint_offset}" no_safety_eps="${no_safety_eps}">
+    <xacro:tiago_arm name="arm" parent="torso_lift_link" reflect="1" tiago_dual="-1">
       <origin xyz="0.15505 0.014 -0.151" rpy="0 0 ${-90 * deg_to_rad}" />
     </xacro:tiago_arm>
 
