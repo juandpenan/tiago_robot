@@ -17,9 +17,6 @@
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <!-- INCLUDES -->
-  <xacro:include filename="$(find pal_urdf_utils)/urdf/deg_to_rad.urdf.xacro" />
-
   <!-- PROPERTIES -->
   <xacro:property name="wrist_friction" value="1.0" />
   <xacro:property name="wrist_damping" value="1.0" />
@@ -36,6 +33,9 @@
   <xacro:if value="${wrist_model == 'wrist-2017'}">
     <xacro:property name="wrist_6_range" value="81"/>
   </xacro:if>
+
+  <!-- INCLUDES -->
+  <xacro:include filename="$(find pal_urdf_utils)/urdf/deg_to_rad.urdf.xacro" />
 
   <!-- MACRO DEFINITION -->
   <xacro:macro name="wrist" params="name parent reflect">

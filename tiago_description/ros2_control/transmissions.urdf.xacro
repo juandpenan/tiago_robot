@@ -17,6 +17,8 @@
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
+  <!-- MACRO DEFINITION -->
+
   <xacro:macro name="tiago_simple_transmission" params="name reduction:=1.0 offset_value:=0.0">
 
     <transmission name="${name}_trans">

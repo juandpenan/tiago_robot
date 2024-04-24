@@ -17,6 +17,7 @@
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
+  <!-- MACRO DEFINITION -->
   <xacro:macro name="force_torque_sensor_gazebo" params="name update_rate">
 
     <gazebo reference="${name}_joint">

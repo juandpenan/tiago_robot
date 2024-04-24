@@ -21,13 +21,24 @@
   <xacro:include filename="$(find tiago_description)/urdf/torso/torso.ros2_control.xacro" />
   <xacro:include filename="$(find tiago_description)/urdf/head/head.ros2_control.xacro" />
   <xacro:include filename="$(find ${base_type}_description)/urdf/wheels/wheel.ros2_control.xacro" />
-  <!-- sensors.ros2_control.xacro should be separated into specific files-->
   <xacro:include filename="$(find ${base_type}_description)/urdf/sensors/sensors.ros2_control.xacro"/>
   <xacro:include filename="$(arg description_calibration_dir)/calibration_constants.urdf.xacro" />
 
+  <!-- Arm, Wrist, FT, EE -->
   <xacro:if value="${has_arm}">
+
+    <!-- Arm -->
     <xacro:include filename="$(find tiago_description)/urdf/arm/arm.ros2_control.xacro" />
+
+    <!-- Wrist -->
     <xacro:include filename="$(find tiago_description)/urdf/arm/wrist.ros2_control.xacro" />
+
+    <!-- FT sensor -->
+    <xacro:if value="${has_ft_sensor}">
+      <xacro:include filename="$(find tiago_description)/urdf/sensors/ftsensor.ros2_control.xacro"/>
+    </xacro:if>
+
+    <!-- End effector -->
     <xacro:if value="${end_effector == 'pal-gripper'}">
       <xacro:include filename="$(find pal_gripper_description)/urdf/gripper.ros2_control.xacro" />
     </xacro:if>
@@ -37,10 +48,7 @@
     <xacro:if value="${end_effector in ['robotiq-2f-85', 'robotiq-2f-140']}">
       <xacro:include filename="$(find pal_robotiq_description)/urdf/robotiq.ros2_control.xacro" />
     </xacro:if>
-  </xacro:if>
 
-  <xacro:if value="${has_ft_sensor}">
-    <xacro:include filename="$(find tiago_description)/urdf/sensors/ftsensor.ros2_control.xacro"/>
   </xacro:if>
 
   <!-- MACRO DEFINITION-->
@@ -79,7 +87,7 @@
       <!-- Torso -->
       <xacro:ros2_control_torso name="torso_lift" reduction="1.0" />
 
-      <!-- Arm -->
+      <!-- Arm, Wrist, FT, EE -->
       <xacro:if value="${has_arm}">
 
         <!-- Arm -->
