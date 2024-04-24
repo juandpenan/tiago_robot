@@ -39,6 +39,10 @@
     </xacro:if>
   </xacro:if>
 
+  <xacro:if value="${has_ft_sensor}">
+    <xacro:include filename="$(find tiago_description)/urdf/sensors/ftsensor.ros2_control.xacro"/>
+  </xacro:if>
+
   <!-- MACRO DEFINITION-->
   <xacro:macro name="tiago_ros2_control">
 
@@ -90,7 +94,6 @@
 
         <!-- Force Torque sensor -->
         <xacro:if value="${has_ft_sensor}">
-          <xacro:include filename="$(find tiago_description)/urdf/sensors/sensors.ros2_control.xacro"/>
           <xacro:ros2_control_force_torque_sensor name="wrist_ft_sensor"/>
         </xacro:if>
 
