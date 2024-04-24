@@ -189,7 +189,7 @@
 
     <!-- End effector -->
     <xacro:if value="${has_end_effector}">
-      <xacro:tiago_end_effector name="${end_effector_name}" parent="${end_effector_link}" type="${end_effector}" reflect="1"/>
+      <xacro:tiago_end_effector name="${end_effector_name}" parent="${end_effector_link}" reflect="1"/>
     </xacro:if>
 
     <!-- FT sensor -->
