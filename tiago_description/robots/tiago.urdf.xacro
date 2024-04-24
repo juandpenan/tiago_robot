@@ -154,9 +154,6 @@
   <!-- Tools -->
   <xacro:include filename="$(find pal_urdf_utils)/urdf/deg_to_rad.urdf.xacro" />
 
-  <!-- Calibration constants -->
-  <xacro:include filename="${description_calibration_dir}/calibration_constants.urdf.xacro" />
-
   <!-- Materials for visualization -->
   <xacro:include filename="$(find pal_urdf_utils)/urdf/materials.urdf.xacro" />
 
@@ -237,6 +234,6 @@
   </link>
 
   <!-- ROS 2 Control -->
-  <xacro:tiago_ros2_control use_sim="$(arg use_sim)" />
+  <xacro:tiago_ros2_control />
 
 </robot>

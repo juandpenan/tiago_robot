@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- 
-  Copyright (c) 2022 PAL Robotics S.L. All rights reserved.
+  Copyright (c) 2024 PAL Robotics S.L. All rights reserved.
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -14,10 +14,12 @@
   See the License for the specific language governing permissions and
   limitations under the License.
  -->
+
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
   <!-- MACRO DEFINITION-->
   <xacro:macro name="openni_camera_gazebo_v0" params="name">
+
     <gazebo reference="${name}_rgb_frame">
       <sensor type="depth" name="${name}_frame_sensor">
         <always_on>true</always_on>
@@ -58,4 +60,5 @@
       </sensor>
     </gazebo>
   </xacro:macro>
+
 </robot>

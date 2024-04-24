@@ -29,6 +29,7 @@
   <xacro:include filename="$(find pal_urdf_utils)/urdf/deg_to_rad.urdf.xacro" />
   <xacro:include filename="$(find tiago_description)/urdf/sensors/xtion_pro_live.urdf.xacro" />
   <xacro:include filename="$(find tiago_description)/urdf/sensors/orbbec_astra.urdf.xacro" />
+  <xacro:include filename="$(arg description_calibration_dir)/calibration_constants.urdf.xacro" />
 
   <!-- MACRO DEFINITION-->
 
@@ -118,9 +119,6 @@
 
     <!-- PROPERTIES -->
     <xacro:property name="head_eps" value="${0.00 if no_safety_eps else 0.07}" />
-
-    <!-- INCLUDES -->
-    <xacro:include filename="$(arg description_calibration_dir)/calibration_constants.urdf.xacro" />
 
     <!-- HEAD DEFINITION -->
 
