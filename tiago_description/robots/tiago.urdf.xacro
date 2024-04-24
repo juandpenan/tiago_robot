@@ -51,6 +51,9 @@
   <xacro:arg name="camera_model" default="orbbec-astra"/>
 
   <!-- false, true -->
+  <xacro:arg name="has_thermal_camera" default="false"/>
+
+  <!-- false, true -->
   <xacro:arg name="no_safety_eps" default="false"/>
 
   <!-- Calibration -->
@@ -104,6 +107,7 @@
   <xacro:property name="has_end_effector" value="${end_effector != 'no-end-effector'}"/>
   <xacro:property name="end_effector_link" value="${'wrist_ft_tool_link' if has_ft_sensor else 'arm_tool_link'}"/>
   <xacro:property name="end_effector_name" value="${'hand' if end_effector == 'pal-hey5' else 'gripper'}"/>
+  <xacro:property name="has_thermal_camera" default="$(arg has_thermal_camera)"/>
   <xacro:property name="arm_x" default="0.08976" />
   <xacro:property name="arm_y" default="0.15918" />
   <xacro:property name="arm_z" default="-0.092008" />
@@ -112,8 +116,8 @@
   <xacro:property name="arm_yaw" default="-1.2217" />
 
   <!-- Calibration -->
-  <xacro:property name="description_calibration_dir" value="${arg description_calibration_dir}"/>
-  <xacro:property name="extrinsic_calibration_dir" value="${arg extrinsic_calibration_dir}"/>
+  <xacro:property name="description_calibration_dir" value="$(arg description_calibration_dir)"/>
+  <xacro:property name="extrinsic_calibration_dir" value="$(arg extrinsic_calibration_dir)"/>
 
   <!-- Execution env configuration -->
   <xacro:property name="use_sim_time" default="$(arg is_multiple)"/>
@@ -151,7 +155,7 @@
   <xacro:include filename="$(find pal_urdf_utils)/urdf/deg_to_rad.urdf.xacro" />
 
   <!-- Calibration constants -->
-  <xacro:include filename="$(arg description_calibration_dir)/calibration_constants.urdf.xacro" />
+  <xacro:include filename="${description_calibration_dir}/calibration_constants.urdf.xacro" />
 
   <!-- Materials for visualization -->
   <xacro:include filename="$(find pal_urdf_utils)/urdf/materials.urdf.xacro" />
@@ -176,7 +180,7 @@
   <xacro:tiago_torso name="torso" parent="base_link"/>
 
   <!-- Head -->
-  <xacro:head name="head" parent="torso_lift_link" camera_model="${camera_model}" description_calibration_dir="${description_calibration_dir}" extrinsic_calibration_dir="$(arg extrinsic_calibration_dir)" no_safety_eps="${no_safety_eps}"/>
+  <xacro:head name="head" parent="torso_lift_link" camera_model="${camera_model}" description_calibration_dir="${description_calibration_dir}" extrinsic_calibration_dir="${extrinsic_calibration_dir}" no_safety_eps="${no_safety_eps}"/>
 
   <!-- Arm -->
   <xacro:if value="${has_arm}">
