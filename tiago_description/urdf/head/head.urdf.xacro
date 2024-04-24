@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- 
-  Copyright (c) 2022 PAL Robotics S.L. All rights reserved.
+  Copyright (c) 2024 PAL Robotics S.L. All rights reserved.
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
  -->
+
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
   <!-- PROPERTIES -->
@@ -24,6 +25,7 @@
   <xacro:property name="head_1_upper_limit" value="75"/>
   <xacro:property name="head_2_lower_limit" value="-60"/>
   <xacro:property name="head_2_upper_limit" value="45"/>
+  <xacro:property name="head_eps" value="${0.00 if no_safety_eps else 0.07}" />
 
   <!-- INCLUDES -->
   <xacro:include filename="$(find pal_urdf_utils)/urdf/deg_to_rad.urdf.xacro" />
@@ -116,11 +118,6 @@
 
   <!-- Complete head -->
   <xacro:macro name="head" params="name parent camera_model description_calibration_dir extrinsic_calibration_dir no_safety_eps:=False">
-
-    <!-- PROPERTIES -->
-    <xacro:property name="head_eps" value="${0.00 if no_safety_eps else 0.07}" />
-
-    <!-- HEAD DEFINITION -->
 
     <!-- Head links -->
     <xacro:head_1 name="${name}_1" parent="${parent}" />

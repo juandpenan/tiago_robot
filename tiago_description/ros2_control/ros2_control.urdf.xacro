@@ -18,7 +18,6 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="tiago">
 
   <!-- INCLUDES -->
-
   <xacro:include filename="$(find tiago_description)/urdf/torso/torso.ros2_control.xacro" />
   <xacro:include filename="$(find tiago_description)/urdf/head/head.ros2_control.xacro" />
   <xacro:include filename="$(find ${base_type}_description)/urdf/wheels/wheel.ros2_control.xacro" />
@@ -26,27 +25,22 @@
   <xacro:include filename="$(find ${base_type}_description)/urdf/sensors/sensors.ros2_control.xacro"/>
   <xacro:include filename="$(arg description_calibration_dir)/calibration_constants.urdf.xacro" />
 
+  <xacro:if value="${has_arm}">
+    <xacro:include filename="$(find tiago_description)/urdf/arm/arm.ros2_control.xacro" />
+    <xacro:include filename="$(find tiago_description)/urdf/arm/wrist.ros2_control.xacro" />
+    <xacro:if value="${end_effector == 'pal-gripper'}">
+      <xacro:include filename="$(find pal_gripper_description)/urdf/gripper.ros2_control.xacro" />
+    </xacro:if>
+    <xacro:if value="${end_effector == 'pal-hey5'}">
+      <xacro:include filename="$(find pal_hey5_description)/urdf/pal_hey5.ros2_control.xacro" />
+    </xacro:if>
+    <xacro:if value="${end_effector in ['robotiq-2f-85', 'robotiq-2f-140']}">
+      <xacro:include filename="$(find pal_robotiq_description)/urdf/robotiq.ros2_control.xacro" />
+    </xacro:if>
+  </xacro:if>
+
   <!-- MACRO DEFINITION-->
   <xacro:macro name="tiago_ros2_control">
-
-    <xacro:if value="${has_arm}">
-
-      <xacro:include filename="$(find tiago_description)/urdf/arm/arm.ros2_control.xacro" />
-      <xacro:include filename="$(find tiago_description)/urdf/arm/wrist.ros2_control.xacro" />
-
-      <xacro:if value="${end_effector == 'pal-gripper'}">
-        <xacro:include filename="$(find pal_gripper_description)/urdf/gripper.ros2_control.xacro" />
-      </xacro:if>
-
-      <xacro:if value="${end_effector == 'pal-hey5'}">
-        <xacro:include filename="$(find pal_hey5_description)/urdf/pal_hey5.ros2_control.xacro" />
-      </xacro:if>
-
-      <xacro:if value="${end_effector in ['robotiq-2f-85', 'robotiq-2f-140']}">
-        <xacro:include filename="$(find pal_robotiq_description)/urdf/robotiq.ros2_control.xacro" />
-      </xacro:if>
-
-    </xacro:if>
 
     <!-- ROS 2 config-->
     <ros2_control name="ros2_control_tiago_system" type="system">
@@ -81,18 +75,24 @@
       <!-- Torso -->
       <xacro:ros2_control_torso name="torso_lift" reduction="1.0" />
 
-      <!-- arm -->
+      <!-- Arm -->
       <xacro:if value="${has_arm}">
 
-        <!-- arm -->
+        <!-- Arm -->
         <xacro:ros2_control_arm name="arm_1" reduction="1.0" offset="${arm_1_joint_offset}" />
         <xacro:ros2_control_arm name="arm_2" reduction="1.0" offset="${arm_2_joint_offset}" />
         <xacro:ros2_control_arm name="arm_3" reduction="1.0" offset="${arm_3_joint_offset}" />
         <xacro:ros2_control_arm name="arm_4" reduction="1.0" offset="${arm_4_joint_offset}" />
 
-        <!-- wrist -->
+        <!-- Wrist -->
         <xacro:ros2_control_wrist_rotational name="arm_5" reduction="1.0" offset="${arm_5_joint_offset}" />
         <xacro:ros2_control_wrist_differential name="arm" number_1="6" number_2="7" act_reduction_1="-1.0" act_reduction_2="1.0" jnt_reduction_1="1.0" jnt_reduction_2="-1.0" number_1_offset="${arm_6_joint_offset}" number_2_offset="${arm_7_joint_offset}" />
+
+        <!-- Force Torque sensor -->
+        <xacro:if value="${has_ft_sensor}">
+          <xacro:include filename="$(find tiago_description)/urdf/sensors/sensors.ros2_control.xacro"/>
+          <xacro:ros2_control_force_torque_sensor name="wrist_ft_sensor"/>
+        </xacro:if>
 
         <!-- End effector -->
         <xacro:if value="${end_effector == 'pal-gripper'}">
@@ -108,12 +108,7 @@
         <xacro:if value="${end_effector == 'robotiq-2f-140'}">
           <xacro:ros2_control_robotiq_140_gripper name="gripper" reduction="1.0" />
         </xacro:if>
-      </xacro:if>
 
-      <!-- Force Torque sensor -->
-      <xacro:if value="${has_ft_sensor}">
-        <xacro:include filename="$(find tiago_description)/urdf/sensors/sensors.ros2_control.xacro"/>
-        <xacro:ros2_control_force_torque_sensor name="wrist_ft_sensor"/>
       </xacro:if>
 
       <!-- Head -->
