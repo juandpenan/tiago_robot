@@ -40,6 +40,7 @@ class LaunchArguments(LaunchArgumentsBase):
     wrist_model: DeclareLaunchArgument = TiagoArgs.wrist_model
     camera_model: DeclareLaunchArgument = TiagoArgs.camera_model
     laser_model: DeclareLaunchArgument = TiagoArgs.laser_model
+    has_screen: DeclareLaunchArgument = TiagoArgs.has_screen
 
     use_sim_time: DeclareLaunchArgument = CommonArgs.use_sim_time
     namespace: DeclareLaunchArgument = CommonArgs.namespace
@@ -75,7 +76,7 @@ def declare_actions(
             {
                 "robot_description": ParameterValue(
                     LaunchConfiguration("robot_description"), value_type=str
-                )
+                ),
             }
         ],
     )
@@ -105,6 +106,7 @@ def create_robot_description_param(context, *args, **kwargs):
         "base_type": read_launch_argument("base_type", context),
         "use_sim": read_launch_argument("use_sim_time", context),
         "namespace": read_launch_argument("namespace", context),
+        "has_screen": read_launch_argument("has_screen", context)
     }
     robot_description = load_xacro(xacro_file_path, xacro_input_args)
 

@@ -28,14 +28,9 @@ from launch_pal.arg_utils import CommonArgs, read_launch_argument
 @dataclass(frozen=True)
 class LaunchArguments(LaunchArgumentsBase):
 
-    base_type: DeclareLaunchArgument = TiagoArgs.base_type
     arm_type: DeclareLaunchArgument = TiagoArgs.arm_type
     end_effector: DeclareLaunchArgument = TiagoArgs.end_effector
     ft_sensor: DeclareLaunchArgument = TiagoArgs.ft_sensor
-    wrist_model: DeclareLaunchArgument = TiagoArgs.wrist_model
-    camera_model: DeclareLaunchArgument = TiagoArgs.camera_model
-    laser_model: DeclareLaunchArgument = TiagoArgs.laser_model
-
     use_sim_time: DeclareLaunchArgument = CommonArgs.use_sim_time
 
 

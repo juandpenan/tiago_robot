@@ -30,7 +30,6 @@ from dataclasses import dataclass
 @dataclass(frozen=True)
 class LaunchArguments(LaunchArgumentsBase):
 
-    base_type: DeclareLaunchArgument = TiagoArgs.base_type
     arm_type: DeclareLaunchArgument = TiagoArgs.arm_type
     end_effector: DeclareLaunchArgument = TiagoArgs.end_effector
     ft_sensor: DeclareLaunchArgument = TiagoArgs.ft_sensor

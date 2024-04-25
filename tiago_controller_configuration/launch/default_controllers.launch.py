@@ -30,8 +30,6 @@ from launch.conditions import (
     IfCondition,
 )
 
-from launch_pal.arg_utils import CommonArgs
-
 
 @dataclass(frozen=True)
 class LaunchArguments(LaunchArgumentsBase):
@@ -40,11 +38,6 @@ class LaunchArguments(LaunchArgumentsBase):
     arm_type: DeclareLaunchArgument = TiagoArgs.arm_type
     end_effector: DeclareLaunchArgument = TiagoArgs.end_effector
     ft_sensor: DeclareLaunchArgument = TiagoArgs.ft_sensor
-    wrist_model: DeclareLaunchArgument = TiagoArgs.wrist_model
-    camera_model: DeclareLaunchArgument = TiagoArgs.camera_model
-    laser_model: DeclareLaunchArgument = TiagoArgs.laser_model
-    use_sim_time: DeclareLaunchArgument = CommonArgs.use_sim_time
-    namespace: DeclareLaunchArgument = CommonArgs.namespace
 
 
 def generate_launch_description():

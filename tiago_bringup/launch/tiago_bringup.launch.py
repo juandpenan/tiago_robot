@@ -32,6 +32,7 @@ class LaunchArguments(LaunchArgumentsBase):
     wrist_model: DeclareLaunchArgument = TiagoArgs.wrist_model
     camera_model: DeclareLaunchArgument = TiagoArgs.camera_model
     laser_model: DeclareLaunchArgument = TiagoArgs.laser_model
+    has_screen: DeclareLaunchArgument = TiagoArgs.has_screen
     use_sim_time: DeclareLaunchArgument = CommonArgs.use_sim_time
     namespace: DeclareLaunchArgument = CommonArgs.namespace
 
@@ -101,6 +102,7 @@ def declare_actions(
             "base_type": launch_args.base_type,
             "namespace": launch_args.namespace,
             "use_sim_time": launch_args.use_sim_time,
+            "has_screen": launch_args.has_screen,
         },
     )
 

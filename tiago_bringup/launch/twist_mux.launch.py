@@ -54,15 +54,15 @@ def declare_actions(
     config_topics_file = os.path.join(
         pkg_share, "config", "twist_mux", "twist_mux_topics.yaml"
     )
-    joystick_file = os.path.join(pkg_share, 'config', 'twist_mux', 'joystick.yaml')
+    joystick_file = os.path.join(pkg_share, "config", "twist_mux", "joystick.yaml")
 
     twist_mux = include_scoped_launch_py_description(
-        'twist_mux', ['launch', 'twist_mux_launch.py'],
+        "twist_mux", ["launch", "twist_mux_launch.py"],
         launch_arguments={
-            'cmd_vel_out': 'mobile_base_controller/cmd_vel_unstamped',
-            'config_locks': config_locks_file,
-            'config_topics': config_topics_file,
-            'config_joy': joystick_file,
+            "cmd_vel_out": "mobile_base_controller/cmd_vel_unstamped",
+            "config_locks": config_locks_file,
+            "config_topics": config_topics_file,
+            "config_joy": joystick_file,
             "use_sim_time": launch_args.use_sim_time,
         }
     )
