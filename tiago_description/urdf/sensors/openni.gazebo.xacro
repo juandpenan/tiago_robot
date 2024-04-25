@@ -17,6 +17,9 @@
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
+  <!-- INCLUDES -->
+  <xacro:include filename="$(find pal_urdf_utils)/urdf/pi.urdf.xacro" />
+
   <!-- MACRO DEFINITION-->
   <xacro:macro name="openni_camera_gazebo_v0" params="name">
 
