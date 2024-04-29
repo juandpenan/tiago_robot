@@ -28,6 +28,7 @@ from launch_pal.arg_utils import CommonArgs
 class LaunchArguments(LaunchArgumentsBase):
 
     base_type: DeclareLaunchArgument = TiagoArgs.base_type
+    has_screen: DeclareLaunchArgument = TiagoArgs.has_screen
     arm_type: DeclareLaunchArgument = TiagoArgs.arm_type
     end_effector: DeclareLaunchArgument = TiagoArgs.end_effector
     ft_sensor: DeclareLaunchArgument = TiagoArgs.ft_sensor
@@ -68,6 +69,7 @@ def declare_actions(
             "base_type": launch_args.base_type,
             "namespace": launch_args.namespace,
             "use_sim_time": launch_args.use_sim_time,
+            "has_screen": launch_args.has_screen
         },
     )
 

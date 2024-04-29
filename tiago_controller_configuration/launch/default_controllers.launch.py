@@ -24,6 +24,7 @@ from launch_pal.arg_utils import LaunchArgumentsBase
 from launch.actions import DeclareLaunchArgument
 from launch_pal.include_utils import include_scoped_launch_py_description
 from launch.substitutions import PythonExpression, LaunchConfiguration
+from launch_pal.arg_utils import CommonArgs
 from launch_pal.robot_arguments import TiagoArgs
 from launch.conditions import (
     LaunchConfigurationNotEquals,
@@ -38,6 +39,7 @@ class LaunchArguments(LaunchArgumentsBase):
     arm_type: DeclareLaunchArgument = TiagoArgs.arm_type
     end_effector: DeclareLaunchArgument = TiagoArgs.end_effector
     ft_sensor: DeclareLaunchArgument = TiagoArgs.ft_sensor
+    use_sim_time: DeclareLaunchArgument = CommonArgs.use_sim_time
 
 
 def generate_launch_description():
@@ -70,6 +72,17 @@ def declare_actions(
                 controller_params_file=LaunchConfiguration("base_params"),
             )
         ],
+        condition=IfCondition(
+            PythonExpression(
+                [
+                    "'",
+                    LaunchConfiguration("use_sim_time"),
+                    "' != 'True' or '",
+                    LaunchConfiguration("base_type"),
+                    "' != 'omni_base'",
+                ]
+            )
+        ),
     )
     launch_description.add_action(base_controller)
 

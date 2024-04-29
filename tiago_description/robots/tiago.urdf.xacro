@@ -35,6 +35,9 @@
   <!-- no-laser, hokuyo, sick-551, sick-561, sick-571-->
   <xacro:arg name="laser_model" default="sick-571"/>
 
+  <!-- false, true -->
+  <xacro:arg name="has_screen" default="false"/>
+
   <!-- no-arm, tiago-arm -->
   <xacro:arg name="arm_model" default="tiago-arm"/>
 
@@ -76,6 +79,7 @@
   <xacro:property name="end_effector" value="$(arg end_effector)" />
   <xacro:property name="camera_model" value="$(arg camera_model)" />
   <xacro:property name="has_thermal_camera" default="$(arg has_thermal_camera)"/>
+  <xacro:property name="has_screen" value="$(arg has_screen)" />
   <xacro:property name="no_safety_eps" value="$(arg no_safety_eps)" />
 
   <!-- HW configuration check -->
