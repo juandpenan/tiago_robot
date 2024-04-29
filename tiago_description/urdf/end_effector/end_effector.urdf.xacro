@@ -20,18 +20,20 @@
   <!-- INCLUDES -->
   <xacro:include filename="$(find pal_urdf_utils)/urdf/deg_to_rad.urdf.xacro" />
   <xacro:include filename="$(find pal_hey5_description)/urdf/pal_hey5_hand.urdf.xacro" />
-  <xacro:if value="${end_effector == 'pal-gripper'}">
-    <xacro:include filename="$(find pal_gripper_description)/urdf/gripper.urdf.xacro" />
-  </xacro:if>
-  <xacro:if value="${end_effector == 'robotiq-2f-85'}">
-    <xacro:include filename="$(find pal_robotiq_description)/urdf/robotiq_85_gripper.urdf.xacro" />
-  </xacro:if>
-  <xacro:if value="${end_effector == 'robotiq-2f-140'}">
-    <xacro:include filename="$(find pal_robotiq_description)/urdf/robotiq_140_gripper.urdf.xacro" />
-  </xacro:if>
 
   <!-- MACRO DEFINITION -->
-  <xacro:macro name="tiago_end_effector" params="name parent reflect tiago_dual:=false">
+  <xacro:macro name="tiago_end_effector" params="name parent reflect end_effector tiago_dual:=false">
+
+    <!-- Param dependant includes -->
+    <xacro:if value="${end_effector == 'pal-gripper'}">
+      <xacro:include filename="$(find pal_gripper_description)/urdf/gripper.urdf.xacro" />
+    </xacro:if>
+    <xacro:if value="${end_effector == 'robotiq-2f-85'}">
+      <xacro:include filename="$(find pal_robotiq_description)/urdf/robotiq_85_gripper.urdf.xacro" />
+    </xacro:if>
+    <xacro:if value="${end_effector == 'robotiq-2f-140'}">
+      <xacro:include filename="$(find pal_robotiq_description)/urdf/robotiq_140_gripper.urdf.xacro" />
+    </xacro:if>
 
     <!-- PAL Gripper -->
     <xacro:if value="${end_effector == 'pal-gripper'}">

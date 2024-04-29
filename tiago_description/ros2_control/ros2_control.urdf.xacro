@@ -22,7 +22,7 @@
   <xacro:include filename="$(find tiago_description)/urdf/head/head.ros2_control.xacro" />
   <xacro:include filename="$(find ${base_type}_description)/urdf/wheels/wheel.ros2_control.xacro" />
   <xacro:include filename="$(find ${base_type}_description)/urdf/sensors/sensors.ros2_control.xacro"/>
-  <xacro:include filename="$(arg description_calibration_dir)/calibration_constants.urdf.xacro" />
+  <xacro:include filename="${description_calibration_dir}/calibration_constants.urdf.xacro" />
 
   <!-- Arm, Wrist, FT, EE -->
   <xacro:if value="${has_arm}">
@@ -54,7 +54,7 @@
   <!-- MACRO DEFINITION-->
   <xacro:macro name="tiago_ros2_control">
 
-    <!-- ROS 2 config-->
+    <!-- ROS 2 control config-->
     <ros2_control name="ros2_control_tiago_system" type="system">
 
       <!-- Execution env config -->

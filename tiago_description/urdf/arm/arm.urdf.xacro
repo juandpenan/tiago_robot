@@ -29,19 +29,21 @@
   <xacro:property name="arm_3_max_effort" value="26" />
   <xacro:property name="arm_4_max_effort" value="26" />
   <xacro:property name="arm_eps" value="${0.00 if no_safety_eps else 0.07}"/>
-  <xacro:if value="${wrist_model == 'wrist-2010'}">
-    <xacro:property name="tool_link_z_offset" value="0.046"/>
-  </xacro:if>
-  <xacro:if value="${wrist_model == 'wrist-2017'}">
-    <xacro:property name="tool_link_z_offset" value="${ 0.046 if has_ft_sensor else 0.0573 }"/>
-  </xacro:if>
 
   <!-- INCLUDES -->
   <xacro:include filename="$(find pal_urdf_utils)/urdf/deg_to_rad.urdf.xacro" />
   <xacro:include filename="$(find tiago_description)/urdf/arm/wrist.urdf.xacro" />
 
   <!-- MACRO DEFINITION-->
-  <xacro:macro name="tiago_arm" params="name parent reflect tiago_dual *origin">
+  <xacro:macro name="tiago_arm" params="name parent reflect wrist_model has_ft_sensor tiago_dual *origin">
+
+    <!-- Param related properties -->
+    <xacro:if value="${wrist_model == 'wrist-2010'}">
+      <xacro:property name="tool_link_z_offset" value="0.046"/>
+    </xacro:if>
+    <xacro:if value="${wrist_model == 'wrist-2017'}">
+      <xacro:property name="tool_link_z_offset" value="${ 0.046 if has_ft_sensor else 0.0573 }"/>
+    </xacro:if>
 
     <!-- Shoulder -->
     <link name="${name}_1_link">
@@ -217,7 +219,7 @@
     </gazebo>
 
     <!-- Wrist -->
-    <xacro:wrist name="${name}" parent="${name}_4_link" reflect="${reflect}"/>
+    <xacro:wrist name="${name}" parent="${name}_4_link" wrist_model="${wrist_model}" reflect="${reflect}"/>
 
     <!-- Tool -->
     <link name="${name}_tool_link">

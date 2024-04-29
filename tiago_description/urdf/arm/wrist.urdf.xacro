@@ -27,18 +27,20 @@
   <xacro:property name="wrist_2_max_effort" value="6.6" />
   <xacro:property name="wrist_3_max_effort" value="6.6" />
   <xacro:property name="wrist_eps" value="${0.00 if no_safety_eps else 0.02}"/>
-  <xacro:if value="${wrist_model == 'wrist-2010'}">
-    <xacro:property name="wrist_6_range" value="${ 81 if has_ft_sensor else 90 }"/>
-  </xacro:if>
-  <xacro:if value="${wrist_model == 'wrist-2017'}">
-    <xacro:property name="wrist_6_range" value="81"/>
-  </xacro:if>
 
   <!-- INCLUDES -->
   <xacro:include filename="$(find pal_urdf_utils)/urdf/deg_to_rad.urdf.xacro" />
 
   <!-- MACRO DEFINITION -->
-  <xacro:macro name="wrist" params="name parent reflect">
+  <xacro:macro name="wrist" params="name parent wrist_model reflect">
+
+    <!-- Param dependant properties -->
+    <xacro:if value="${wrist_model == 'wrist-2010'}">
+      <xacro:property name="wrist_6_range" value="${ 81 if has_ft_sensor else 90 }"/>
+    </xacro:if>
+    <xacro:if value="${wrist_model == 'wrist-2017'}">
+      <xacro:property name="wrist_6_range" value="81"/>
+    </xacro:if>
 
     <!-- Wrist-->
     <link name="${name}_5_link">

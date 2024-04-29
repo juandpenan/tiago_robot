@@ -119,7 +119,7 @@ def create_joy_teleop_filename(context):
         ft_sensor=read_launch_argument("ft_sensor", context),
     )
 
-    joy_teleop_file = f"joy_teleop_{hw_suffix}.yaml"
+    joy_teleop_file = f"joy_teleop{hw_suffix}.yaml"
 
     joy_teleop_path = os.path.join(
         get_package_share_directory("tiago_bringup"),

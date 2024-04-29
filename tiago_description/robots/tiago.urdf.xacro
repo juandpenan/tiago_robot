@@ -181,7 +181,7 @@
   <xacro:if value="${has_arm}">
 
     <!-- Arm -->
-    <xacro:tiago_arm name="arm" parent="torso_lift_link" reflect="1" tiago_dual="-1">
+    <xacro:tiago_arm name="arm" parent="torso_lift_link" wrist_model="${wrist_model}" has_ft_sensor="${has_ft_sensor}" reflect="1" tiago_dual="-1">
       <origin xyz="${arm_x} ${arm_y} ${arm_z}" rpy="${arm_roll} ${arm_pitch} ${arm_yaw * deg_to_rad}" />
     </xacro:tiago_arm>
 
@@ -192,7 +192,7 @@
 
     <!-- End effector -->
     <xacro:if value="${has_end_effector}">
-      <xacro:tiago_end_effector name="${end_effector_name}" parent="${end_effector_link}" reflect="1"/>
+      <xacro:tiago_end_effector name="${end_effector_name}" parent="${end_effector_link}" end_effector="${end_effector}" reflect="1"/>
     </xacro:if>
 
   </xacro:if>
