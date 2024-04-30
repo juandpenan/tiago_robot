@@ -2,6 +2,30 @@
 Changelog for package tiago_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'omm/fix/urdf_complete_std' into 'humble-devel'
+  URDF std
+  See merge request robots/tiago_robot!278
+* Suggested changed
+* Module, joy config and restored support for tiago dual
+* Gazebo config std
+* Final mods
+* Transmissions std
+* Thermal camera std
+* FT sensor std
+* ee std
+* Arm std
+* Style fix
+* ROS2 control and include std
+* Head std
+* Torso std
+* Property/arg standarization
+* High level urdf standarization
+* Suggested changes
+* Launch files moved to TIAGo family standard
+* Contributors: Oscar, davidterkuile
+
 4.2.7 (2024-04-22)
 ------------------
 * Merge branch 'sgg/feat/base_type_omni_base' into 'humble-devel'

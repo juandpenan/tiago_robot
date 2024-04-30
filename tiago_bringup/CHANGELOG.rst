@@ -2,6 +2,17 @@
 Changelog for package tiago_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'omm/fix/urdf_complete_std' into 'humble-devel'
+  URDF std
+  See merge request robots/tiago_robot!278
+* Module, joy config and restored support for tiago dual
+* Omni related checks and files
+* Suggested changes
+* Launch files moved to TIAGo family standard
+* Contributors: Oscar, davidterkuile
+
 4.2.7 (2024-04-22)
 ------------------
 

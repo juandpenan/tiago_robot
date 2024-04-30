@@ -2,6 +2,22 @@
 Changelog for package tiago_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'omm/fix/urdf_complete_std' into 'humble-devel'
+  URDF std
+  See merge request robots/tiago_robot!278
+* Suggested changed
+* Module, joy config and restored support for tiago dual
+* Omni related checks and files
+* Suggested changes
+* Launch files moved to TIAGo family standard
+* Merge branch 'tpe/add_omni_controller' into 'humble-devel'
+  Add missing dependency for the omni_base controller
+  See merge request robots/tiago_robot!279
+* Add missing dependency for the omni_base controller
+* Contributors: Oscar, davidterkuile, thomas.peyrucain
+
 4.2.7 (2024-04-22)
 ------------------
 * Merge branch 'sgg/feat/base_type_omni_base' into 'humble-devel'
