@@ -113,20 +113,16 @@ def declare_actions(
 
 def create_joy_teleop_filename(context):
 
-    hw_suffix = get_tiago_hw_suffix(
-        arm=read_launch_argument("arm_type", context),
-        end_effector=read_launch_argument("end_effector", context),
-        ft_sensor=read_launch_argument("ft_sensor", context),
-    )
+    base_type = read_launch_argument("base_type", context)
+    pkg_dir = get_package_share_directory("tiago_bringup")
 
-    joy_teleop_file = f"joy_teleop{hw_suffix}.yaml"
+    joy_teleop_file = f"joy_teleop_{base_type}.yaml"
 
     joy_teleop_path = os.path.join(
-        get_package_share_directory("tiago_bringup"),
+        pkg_dir,
         "config",
         "joy_teleop",
         joy_teleop_file,
     )
 
-    joy_teleop_config = SetLaunchConfiguration("teleop_config", joy_teleop_path)
-    return [joy_teleop_config]
+    return [SetLaunchConfiguration("teleop_config", joy_teleop_path)]
