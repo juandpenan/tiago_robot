@@ -2,8 +2,8 @@
 Changelog for package tiago_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.2.8 (2024-04-30)
+------------------
 * Merge branch 'omm/fix/urdf_complete_std' into 'humble-devel'
   URDF std
   See merge request robots/tiago_robot!278
