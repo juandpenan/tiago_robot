@@ -85,6 +85,9 @@ def declare_actions(
     twist_mux = include_scoped_launch_py_description(
         pkg_name="tiago_bringup",
         paths=["launch", "twist_mux.launch.py"],
+        launch_arguments={
+            "base_type": launch_args.base_type,
+        }
     )
 
     launch_description.add_action(twist_mux)
