@@ -2,8 +2,8 @@
 Changelog for package tiago_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.2.9 (2024-05-07)
+------------------
 * Merge branch 'omm/fix/twist_mux_base_type' into 'humble-devel'
   Passing base_type to twist_mux from the bringup properly
   See merge request robots/tiago_robot!282
