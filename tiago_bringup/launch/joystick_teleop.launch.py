@@ -20,7 +20,6 @@ from launch.substitutions import LaunchConfiguration
 from launch.actions import DeclareLaunchArgument, SetLaunchConfiguration, OpaqueFunction
 from launch_ros.actions import Node
 from launch.conditions import LaunchConfigurationNotEquals
-from tiago_description.tiago_launch_utils import get_tiago_hw_suffix
 from launch_pal.arg_utils import LaunchArgumentsBase, read_launch_argument
 from launch_pal.robot_arguments import TiagoArgs
 
@@ -33,6 +32,7 @@ class LaunchArguments(LaunchArgumentsBase):
     arm_type: DeclareLaunchArgument = TiagoArgs.arm_type
     end_effector: DeclareLaunchArgument = TiagoArgs.end_effector
     ft_sensor: DeclareLaunchArgument = TiagoArgs.ft_sensor
+    base_type: DeclareLaunchArgument = TiagoArgs.base_type
 
     cmd_vel: DeclareLaunchArgument = DeclareLaunchArgument(
         name="cmd_vel",
@@ -72,8 +72,8 @@ def declare_actions(
     pkg_dir = get_package_share_directory("tiago_bringup")
 
     joy_node = Node(
-        package="joy",
-        executable="joy_node",
+        package="joy_linux",
+        executable="joy_linux_node",
         name="joystick",
         parameters=[os.path.join(pkg_dir, "config", "joy_teleop", "joy_config.yaml")],
     )
@@ -113,20 +113,16 @@ def declare_actions(
 
 def create_joy_teleop_filename(context):
 
-    hw_suffix = get_tiago_hw_suffix(
-        arm=read_launch_argument("arm_type", context),
-        end_effector=read_launch_argument("end_effector", context),
-        ft_sensor=read_launch_argument("ft_sensor", context),
-    )
+    base_type = read_launch_argument("base_type", context)
+    pkg_dir = get_package_share_directory("tiago_bringup")
 
-    joy_teleop_file = f"joy_teleop{hw_suffix}.yaml"
+    joy_teleop_file = f"joy_teleop_{base_type}.yaml"
 
     joy_teleop_path = os.path.join(
-        get_package_share_directory("tiago_bringup"),
+        pkg_dir,
         "config",
         "joy_teleop",
         joy_teleop_file,
     )
 
-    joy_teleop_config = SetLaunchConfiguration("teleop_config", joy_teleop_path)
-    return [joy_teleop_config]
+    return [SetLaunchConfiguration("teleop_config", joy_teleop_path)]
