@@ -2,6 +2,14 @@
 Changelog for package tiago_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'dtk/fix/robot-state-publisher' into 'humble-devel'
+  Dtk/fix/robot state publisher
+  See merge request robots/tiago_robot!281
+* Add robot state publisher dependency to tiago description
+* Contributors: davidterkuile
+
 4.2.8 (2024-04-30)
 ------------------
 * Merge branch 'omm/fix/urdf_complete_std' into 'humble-devel'

@@ -2,6 +2,9 @@
 Changelog for package tiago_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 4.2.8 (2024-04-30)
 ------------------
 * Merge branch 'omm/fix/urdf_complete_std' into 'humble-devel'

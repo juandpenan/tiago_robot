@@ -2,6 +2,23 @@
 Changelog for package tiago_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'omm/fix/twist_mux_base_type' into 'humble-devel'
+  Passing base_type to twist_mux from the bringup properly
+  See merge request robots/tiago_robot!282
+* Passing base_type to twist_mux from the bringup properlyy
+* Merge branch 'dtk/fix/robot-state-publisher' into 'humble-devel'
+  Dtk/fix/robot state publisher
+  See merge request robots/tiago_robot!281
+* Remove robot state publisher from tiago_bringup
+* Merge branch 'omm/feat/new_joy_config' into 'humble-devel'
+  New Joy config
+  See merge request robots/tiago_robot!280
+* Fixed 1.0 default value
+* Cleaning old config files
+* Contributors: davidterkuile, oscarmartinez
+
 4.2.8 (2024-04-30)
 ------------------
 * Merge branch 'omm/fix/urdf_complete_std' into 'humble-devel'
