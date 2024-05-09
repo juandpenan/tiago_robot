@@ -2,6 +2,9 @@
 Changelog for package tiago_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 4.2.9 (2024-05-07)
 ------------------
 * Merge branch 'dtk/fix/robot-state-publisher' into 'humble-devel'
