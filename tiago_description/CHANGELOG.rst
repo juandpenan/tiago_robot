@@ -2,6 +2,14 @@
 Changelog for package tiago_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'omm/feat/public_sim_conditions' into 'humble-devel'
+  Publishing the odom tf depending on the is_public_sim parameter
+  See merge request robots/tiago_robot!284
+* Publishing the odom tf depending on the is_public_sim parameter
+* Contributors: davidterkuile, oscarmartinez
+
 4.2.10 (2024-05-09)
 -------------------
 
