@@ -2,8 +2,8 @@
 Changelog for package tiago_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.2.10 (2024-05-09)
+-------------------
 * Merge branch 'omm/fix/joy_device' into 'humble-devel'
   Added proper joy device setup
   See merge request robots/tiago_robot!283
