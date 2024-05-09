@@ -97,7 +97,7 @@ def create_robot_description_param(context, *args, **kwargs):
     )
 
     xacro_input_args = {
-        "arm_model": read_launch_argument("arm_type", context),
+        "arm_type": read_launch_argument("arm_type", context),
         "camera_model": read_launch_argument("camera_model", context),
         "end_effector": read_launch_argument("end_effector", context),
         "ft_sensor": read_launch_argument("ft_sensor", context),
