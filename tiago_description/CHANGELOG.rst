@@ -2,8 +2,8 @@
 Changelog for package tiago_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.2.12 (2024-05-10)
+-------------------
 * Merge branch 'omm/fix/desc_test_proper_arg' into 'humble-devel'
   Changed test arm argument to arm_type
   See merge request robots/tiago_robot!286
