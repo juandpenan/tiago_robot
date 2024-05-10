@@ -2,6 +2,18 @@
 Changelog for package tiago_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'omm/fix/desc_test_proper_arg' into 'humble-devel'
+  Changed test arm argument to arm_type
+  See merge request robots/tiago_robot!286
+* Changed test arm argument to arm_type
+* Merge branch 'omm/feat/arm_name_std' into 'humble-devel'
+  Changed arm_model to arm_type in the URDF
+  See merge request robots/tiago_robot!285
+* Changed arm_model to arm_type in the URDF
+* Contributors: davidterkuile, oscarmartinez
+
 4.2.11 (2024-05-09)
 -------------------
 * Merge branch 'omm/feat/public_sim_conditions' into 'humble-devel'
