@@ -20,6 +20,14 @@ if(BUILD_TESTING)
 
   #  find_package(rostest REQUIRED)
     foreach(arm_type tiago-arm no-arm)
+      foreach(base_type pmb2 omni_base)
+        add_launch_test(
+          test/test_description.launch.py
+          TARGET "tiago_description_${base_type}_${arm_type}"
+          ARGS "arm_type:=${arm_type}" "base_type:=${base_type}"
+        )
+      endforeach()
+
         # Separated to speed up tests, otherwise it's over 13min
         foreach(end_effector no-end-effector pal-gripper pal-hey5 custom)
             foreach(ft_sensor no-ft-sensor schunk-ft)
