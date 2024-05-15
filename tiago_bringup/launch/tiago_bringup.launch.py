@@ -34,6 +34,7 @@ class LaunchArguments(LaunchArgumentsBase):
     laser_model: DeclareLaunchArgument = TiagoArgs.laser_model
     has_screen: DeclareLaunchArgument = TiagoArgs.has_screen
     use_sim_time: DeclareLaunchArgument = CommonArgs.use_sim_time
+    is_public_sim: DeclareLaunchArgument = CommonArgs.is_public_sim
     namespace: DeclareLaunchArgument = CommonArgs.namespace
 
 
@@ -103,9 +104,10 @@ def declare_actions(
             "laser_model": launch_args.laser_model,
             "camera_model": launch_args.camera_model,
             "base_type": launch_args.base_type,
+            "has_screen": launch_args.has_screen,
             "namespace": launch_args.namespace,
             "use_sim_time": launch_args.use_sim_time,
-            "has_screen": launch_args.has_screen,
+            "is_public_sim": launch_args.is_public_sim,
         },
     )
 
