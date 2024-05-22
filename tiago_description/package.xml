@@ -24,7 +24,7 @@
   <exec_depend>xacro</exec_depend>
   <exec_depend>robot_state_publisher</exec_depend>
   <exec_depend>pmb2_description</exec_depend>
-  <exec_depend condition="$PAL_DISTRO > 0">omni_base_description</exec_depend>
+  <exec_depend>omni_base_description</exec_depend>
   <exec_depend>pal_hey5_description</exec_depend>
   <exec_depend>pal_gripper_description</exec_depend>
   <exec_depend>pal_robotiq_description</exec_depend>
