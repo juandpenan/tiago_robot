@@ -30,7 +30,7 @@ extension = os.path.splitext(no_em_extension_path)[1]
 for arm in ['tiago-arm', 'no-arm']:
     if arm not in ['no-arm']:
         end_effectors = ['pal-hey5', 'pal-gripper', 'no-ee', 'robotiq-2f-85',
-                         'robotiq-2f-140']
+                         'robotiq-2f-140', 'custom']
         ft_sensors = ['schunk-ft', 'no-ft-sensor']
     else:
         end_effectors = ['no-ee']
