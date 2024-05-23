@@ -240,9 +240,7 @@ def configure_end_effector(context, *args, **kwargs):
                 [
                     "'",
                     LaunchConfiguration("arm_type"),
-                    "' != 'no-arm' and '",
-                    LaunchConfiguration("ft_sensor"),
-                    "' != 'no-ft-sensor'",
+                    "' != 'no-arm'",
                 ]
             )
         ),
