@@ -23,6 +23,7 @@ from launch.actions import DeclareLaunchArgument, SetLaunchConfiguration, Opaque
 from tiago_description.tiago_launch_utils import get_tiago_hw_suffix
 from launch_pal.include_utils import include_scoped_launch_py_description
 from launch_pal.arg_utils import CommonArgs, read_launch_argument
+from launch_pal.param_utils import merge_param_files
 
 
 @dataclass(frozen=True)
@@ -82,6 +83,10 @@ def create_play_motion_params(context):
     motions_yaml = PathJoinSubstitution(
         [pkg_share_dir, "config", "motions", motions_file]
     )
+    general_yaml = PathJoinSubstitution(
+        [pkg_share_dir, "config", "motions", "tiago_motions_general.yaml"]
+    )
+    merged_yaml = merge_param_files([motions_yaml.perform(context), general_yaml.perform(context)])
 
     motion_planner_file = f"motion_planner{hw_suffix}.yaml"
     motion_planner_config = PathJoinSubstitution(
@@ -89,6 +94,6 @@ def create_play_motion_params(context):
     )
 
     return [
-        SetLaunchConfiguration("motions_file", motions_yaml),
+        SetLaunchConfiguration("motions_file", merged_yaml),
         SetLaunchConfiguration("motion_planner_config", motion_planner_config),
     ]
