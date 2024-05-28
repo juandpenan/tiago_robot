@@ -72,7 +72,7 @@ def create_play_motion_params(context):
 
     pkg_name = "tiago_bringup"
     pkg_share_dir = get_package_share_directory(pkg_name)
-    arm=read_launch_argument("arm_type", context),
+    arm = read_launch_argument("arm_type", context),
 
     hw_suffix = get_tiago_hw_suffix(
         arm=read_launch_argument("arm_type", context),
@@ -88,7 +88,8 @@ def create_play_motion_params(context):
         [pkg_share_dir, "config", "motions", "tiago_motions_general.yaml"]
     )
     if (arm != 'no-arm'):
-        merged_yaml = merge_param_files([motions_yaml.perform(context), general_yaml.perform(context)])
+        merged_yaml = merge_param_files([motions_yaml.perform(context),
+                                         general_yaml.perform(context)])
     else:
         merged_yaml = motions_yaml
 
