@@ -77,7 +77,6 @@ def create_play_motion_params(context):
     hw_suffix = get_tiago_hw_suffix(
         arm=read_launch_argument("arm_type", context),
         end_effector=read_launch_argument("end_effector", context),
-        ft_sensor=read_launch_argument("ft_sensor", context),
     )
 
     motions_file = f"tiago_motions{hw_suffix}.yaml"
