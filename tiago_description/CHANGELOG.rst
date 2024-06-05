@@ -2,6 +2,22 @@
 Changelog for package tiago_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'dtk/fix/description-test-base-type' into 'humble-devel'
+  Add the base type to the tests
+  See merge request robots/tiago_robot!289
+* Add the base type to the tests
+* Merge branch 'dtk/fix/is-public-sim' into 'humble-devel'
+  Fix missing public sim arg
+  See merge request robots/tiago_robot!290
+* Fix missing public sim arg
+* Merge branch 'fix/is_public_sim_argument' into 'humble-devel'
+  add missing argument is_public_sim
+  See merge request robots/tiago_robot!288
+* add missing argument is_public_sim
+* Contributors: Aina Irisarri, David ter Kuile, davidterkuile
+
 4.2.12 (2024-05-10)
 -------------------
 * Merge branch 'omm/fix/desc_test_proper_arg' into 'humble-devel'

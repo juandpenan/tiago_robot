@@ -2,6 +2,29 @@
 Changelog for package tiago_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'feat/motions' into 'humble-devel'
+  pre-recorded_motions
+  See merge request robots/tiago_robot!292
+* delete sensor files and fix launch
+* delete sensor files and added epick file
+* linters
+* remove motinos from end-effectors specifics
+* add motions in general
+* add conditionfor no-arm
+* create general motion file & merge them
+* add custom file for posible costumers
+* Merge branch 'dtk/fix/is-public-sim' into 'humble-devel'
+  Fix missing public sim arg
+  See merge request robots/tiago_robot!290
+* Fix missing public sim arg
+* Merge branch 'fix/motion_planner_files' into 'humble-devel'
+  Fix/motion planner files
+  See merge request robots/tiago_robot!287
+* new file names
+* Contributors: Aina, Aina Irisarri, David ter Kuile, davidterkuile
+
 4.2.12 (2024-05-10)
 -------------------
 

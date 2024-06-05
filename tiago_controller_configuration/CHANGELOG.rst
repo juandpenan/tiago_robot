@@ -2,6 +2,14 @@
 Changelog for package tiago_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'feat/motions' into 'humble-devel'
+  pre-recorded_motions
+  See merge request robots/tiago_robot!292
+* fix launch ee_controller when no-ft-sensor
+* Contributors: Aina, davidterkuile
+
 4.2.12 (2024-05-10)
 -------------------
 
