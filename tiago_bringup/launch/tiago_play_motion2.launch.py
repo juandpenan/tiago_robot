@@ -23,6 +23,7 @@ from launch.actions import DeclareLaunchArgument, SetLaunchConfiguration, Opaque
 from tiago_description.tiago_launch_utils import get_tiago_hw_suffix
 from launch_pal.include_utils import include_scoped_launch_py_description
 from launch_pal.arg_utils import CommonArgs, read_launch_argument
+from launch_pal.param_utils import merge_param_files
 
 
 @dataclass(frozen=True)
@@ -71,17 +72,25 @@ def create_play_motion_params(context):
 
     pkg_name = "tiago_bringup"
     pkg_share_dir = get_package_share_directory(pkg_name)
+    arm = read_launch_argument("arm_type", context),
 
     hw_suffix = get_tiago_hw_suffix(
         arm=read_launch_argument("arm_type", context),
         end_effector=read_launch_argument("end_effector", context),
-        ft_sensor=read_launch_argument("ft_sensor", context),
     )
 
     motions_file = f"tiago_motions{hw_suffix}.yaml"
     motions_yaml = PathJoinSubstitution(
         [pkg_share_dir, "config", "motions", motions_file]
     )
+    general_yaml = PathJoinSubstitution(
+        [pkg_share_dir, "config", "motions", "tiago_motions_general.yaml"]
+    )
+    if (arm != 'no-arm'):
+        merged_yaml = merge_param_files([motions_yaml.perform(context),
+                                         general_yaml.perform(context)])
+    else:
+        merged_yaml = motions_yaml
 
     motion_planner_file = f"motion_planner{hw_suffix}.yaml"
     motion_planner_config = PathJoinSubstitution(
@@ -89,6 +98,6 @@ def create_play_motion_params(context):
     )
 
     return [
-        SetLaunchConfiguration("motions_file", motions_yaml),
+        SetLaunchConfiguration("motions_file", merged_yaml),
         SetLaunchConfiguration("motion_planner_config", motion_planner_config),
     ]
