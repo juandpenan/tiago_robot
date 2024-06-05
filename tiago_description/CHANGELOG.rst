@@ -2,8 +2,8 @@
 Changelog for package tiago_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.2.13 (2024-06-05)
+-------------------
 * Merge branch 'dtk/fix/description-test-base-type' into 'humble-devel'
   Add the base type to the tests
   See merge request robots/tiago_robot!289

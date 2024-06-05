@@ -2,8 +2,8 @@
 Changelog for package tiago_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.2.13 (2024-06-05)
+-------------------
 * Merge branch 'feat/motions' into 'humble-devel'
   pre-recorded_motions
   See merge request robots/tiago_robot!292
