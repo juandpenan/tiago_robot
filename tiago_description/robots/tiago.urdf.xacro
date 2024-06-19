@@ -164,9 +164,6 @@
   <!-- Materials for visualization -->
   <xacro:include filename="$(find pal_urdf_utils)/urdf/materials.urdf.xacro" />
 
-  <!-- Generic simulator_gazebo plugins -->
-  <xacro:include filename="$(find tiago_description)/gazebo/gazebo.urdf.xacro" />
-
   <!-- ROS 2 control -->
   <xacro:include filename="$(find tiago_description)/ros2_control/ros2_control.urdf.xacro" />
 

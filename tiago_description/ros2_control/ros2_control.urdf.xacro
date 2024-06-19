@@ -54,6 +54,15 @@
   <!-- MACRO DEFINITION-->
   <xacro:macro name="tiago_ros2_control">
 
+    <!-- Init the ROS 2 control gazebo interface -->
+    <xacro:if value="${use_sim_time}">
+      <gazebo>
+        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+          <parameters>$(find tiago_description)/ros2_control/gazebo_controller_manager_cfg.yaml</parameters>
+        </plugin>
+      </gazebo>
+    </xacro:if>
+
     <!-- ROS 2 control config-->
     <ros2_control name="ros2_control_tiago_system" type="system">
 

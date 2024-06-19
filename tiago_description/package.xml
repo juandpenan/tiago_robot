@@ -28,7 +28,6 @@
   <exec_depend>pal_hey5_description</exec_depend>
   <exec_depend>pal_gripper_description</exec_depend>
   <exec_depend>pal_robotiq_description</exec_depend>
-  <exec_depend>tiago_controller_configuration</exec_depend>
   <exec_depend>launch</exec_depend>
   <exec_depend>launch_ros</exec_depend>
   <exec_depend>launch_pal</exec_depend>
