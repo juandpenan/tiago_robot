@@ -174,7 +174,7 @@
 
   <!-- Base -->
   <xacro:if value="${base_type == 'pmb2'}">
-    <xacro:base_sensors name="base" laser_model="${laser_model}" sonars="true" microphone="true"/>
+    <xacro:base_sensors name="base" laser_model="${laser_model}" has_sonars="true" has_microphone="true"/>
   </xacro:if>
   <xacro:if value="${base_type == 'omni_base'}">
     <xacro:base_sensors name="base" front_laser_model="${laser_model}" rear_laser_model="${laser_model}"/>
