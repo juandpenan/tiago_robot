@@ -2,8 +2,8 @@
 Changelog for package tiago_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.2.14 (2024-06-25)
+-------------------
 * Merge branch 'dtk/fix/base-urdf' into 'humble-devel'
   Dtk/fix/base urdf
   See merge request robots/tiago_robot!295
