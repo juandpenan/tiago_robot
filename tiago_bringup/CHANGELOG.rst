@@ -2,6 +2,9 @@
 Changelog for package tiago_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 4.2.13 (2024-06-05)
 -------------------
 * Merge branch 'feat/motions' into 'humble-devel'
