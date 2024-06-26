@@ -2,8 +2,8 @@
 Changelog for package tiago_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.2.15 (2024-06-26)
+-------------------
 * Merge branch 'dtk/move-robot-args' into 'humble-devel'
   Change imports for robot arguments
   See merge request robots/tiago_robot!297
