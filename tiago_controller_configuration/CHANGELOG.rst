@@ -2,6 +2,14 @@
 Changelog for package tiago_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'dtk/move-robot-args' into 'humble-devel'
+  Change imports for robot arguments
+  See merge request robots/tiago_robot!297
+* Change imports for robot arguments
+* Contributors: David ter Kuile, davidterkuile
+
 4.2.14 (2024-06-25)
 -------------------
 * Merge branch 'dtk/fix/base-urdf' into 'humble-devel'
