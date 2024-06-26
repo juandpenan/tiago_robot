@@ -24,8 +24,8 @@ from launch_pal.arg_utils import LaunchArgumentsBase
 from launch.actions import DeclareLaunchArgument
 from launch_pal.include_utils import include_scoped_launch_py_description
 from launch.substitutions import PythonExpression, LaunchConfiguration
-from launch_pal.arg_utils import CommonArgs
-from launch_pal.robot_arguments import TiagoArgs
+from launch_pal.robot_arguments import CommonArgs
+from tiago_description.launch_arguments import TiagoArgs
 from launch.conditions import (
     LaunchConfigurationNotEquals,
     IfCondition,
