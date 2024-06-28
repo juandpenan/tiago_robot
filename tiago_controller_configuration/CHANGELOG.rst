@@ -2,8 +2,8 @@
 Changelog for package tiago_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.2.16 (2024-06-28)
+-------------------
 * Add imu sensor broadcaster
 * Contributors: davidterkuile
 
