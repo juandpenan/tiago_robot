@@ -2,6 +2,11 @@
 Changelog for package tiago_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add imu sensor broadcaster
+* Contributors: davidterkuile
+
 4.2.15 (2024-06-26)
 -------------------
 * Merge branch 'dtk/move-robot-args' into 'humble-devel'

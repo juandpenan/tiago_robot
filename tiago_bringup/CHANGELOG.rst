@@ -2,6 +2,9 @@
 Changelog for package tiago_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 4.2.15 (2024-06-26)
 -------------------
 * Merge branch 'dtk/move-robot-args' into 'humble-devel'
