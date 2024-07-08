@@ -2,8 +2,8 @@
 Changelog for package tiago_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.2.17 (2024-07-08)
+-------------------
 * change module name into 10\_*
 * change the bases config file for their packages config files
 * Contributors: Aina
