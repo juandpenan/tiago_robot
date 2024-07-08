@@ -2,6 +2,11 @@
 Changelog for package tiago_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* change module name into 10\_*
+* Contributors: Aina
+
 4.2.16 (2024-06-28)
 -------------------
 

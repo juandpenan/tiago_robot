@@ -2,6 +2,12 @@
 Changelog for package tiago_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* change module name into 10\_*
+* change the bases config file for their packages config files
+* Contributors: Aina
+
 4.2.16 (2024-06-28)
 -------------------
 * Add imu sensor broadcaster
