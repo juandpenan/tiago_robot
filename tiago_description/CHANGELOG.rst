@@ -2,8 +2,8 @@
 Changelog for package tiago_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.2.18 (2024-07-09)
+-------------------
 * Add warning for pal_module_cmake not found
 * Contributors: Noel Jimenez
 
