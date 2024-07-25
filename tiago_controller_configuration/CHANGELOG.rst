@@ -2,8 +2,8 @@
 Changelog for package tiago_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.2.19 (2024-07-25)
+-------------------
 * Change parameter to arm_type
 * Contributors: thomas.peyrucain
 
