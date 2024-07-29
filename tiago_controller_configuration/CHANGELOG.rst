@@ -2,6 +2,11 @@
 Changelog for package tiago_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Adding open_loop_control variable to head controller
+* Contributors: vivianamorlando
+
 4.2.19 (2024-07-25)
 -------------------
 * Change parameter to arm_type
