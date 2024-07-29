@@ -2,8 +2,8 @@
 Changelog for package tiago_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.2.20 (2024-07-29)
+-------------------
 * Adding open_loop_control variable to head controller
 * Contributors: vivianamorlando
 
