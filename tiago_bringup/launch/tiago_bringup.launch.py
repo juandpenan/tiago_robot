@@ -28,6 +28,7 @@ class LaunchArguments(LaunchArgumentsBase):
 
     base_type: DeclareLaunchArgument = TiagoArgs.base_type
     arm_type: DeclareLaunchArgument = TiagoArgs.arm_type
+    arm_motor_model: DeclareLaunchArgument = TiagoArgs.arm_motor_model
     end_effector: DeclareLaunchArgument = TiagoArgs.end_effector
     ft_sensor: DeclareLaunchArgument = TiagoArgs.ft_sensor
     wrist_model: DeclareLaunchArgument = TiagoArgs.wrist_model
@@ -62,6 +63,7 @@ def declare_actions(
         paths=["launch", "default_controllers.launch.py"],
         launch_arguments={
             "arm_type": launch_args.arm_type,
+            "arm_motor_model": launch_args.arm_motor_model,
             "end_effector": launch_args.end_effector,
             "ft_sensor": launch_args.ft_sensor,
             "base_type": launch_args.base_type,

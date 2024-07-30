@@ -24,7 +24,7 @@
   <exec_depend>joint_trajectory_controller</exec_depend>
   <exec_depend>launch</exec_depend>
   <exec_depend>launch_pal</exec_depend>
-<!--  <exec_depend condition="$PAL_DISTRO > 0">ros2_gravity_compensation_controller</exec_depend>-->
+  <exec_depend condition="$PAL_DISTRO > 0">gravity_compensation_controller2</exec_depend>
   <exec_depend>pal_gripper_controller_configuration</exec_depend>
   <exec_depend>pal_hey5_controller_configuration</exec_depend>
   <exec_depend>pal_robotiq_controller_configuration</exec_depend>
