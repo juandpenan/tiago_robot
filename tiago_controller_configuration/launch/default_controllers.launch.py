@@ -142,6 +142,17 @@ def declare_actions(
 
     launch_description.add_action(arm_controller)
 
+    # Gravity compensation controller
+    gravity_compensation_controller = GroupAction(
+        [
+            include_scoped_launch_py_description(
+                pkg_name="tiago_controller_configuration",
+                paths=['launch', "gravity_compensation_controller.launch.py"])
+        ]
+    )
+
+    launch_description.add_action(gravity_compensation_controller)
+
     # FT Sensor
     ft_sensor_controller = GroupAction(
         [
