@@ -2,6 +2,11 @@
 Changelog for package tiago_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* enable odom tf for pmb2 for public sim
+* Contributors: David ter Kuile
+
 4.2.20 (2024-07-29)
 -------------------
 * Adding open_loop_control variable to head controller
