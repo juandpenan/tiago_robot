@@ -2,6 +2,9 @@
 Changelog for package tiago_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 4.2.21 (2024-08-05)
 -------------------
 * enable odom tf for pmb2 for public sim
