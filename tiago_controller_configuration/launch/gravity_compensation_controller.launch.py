@@ -62,8 +62,7 @@ def gravity_compensation_controller(context, *args, **kwargs):
         arguments=[
             "gravity_compensation_controller", "--param-file", os.path.join(
                 get_package_share_directory('tiago_controller_configuration'),
-                'config', param_file),
-            "--controller-type", "pal_controllers/GravityCompensationController", "--inactive"],
+                'config', param_file), "--inactive"],
     )
 
     return [gravity_spawner_node]
