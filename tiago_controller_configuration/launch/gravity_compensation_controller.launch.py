@@ -26,6 +26,7 @@ from controller_manager.launch_utils import generate_load_controller_launch_desc
 from launch_pal.param_utils import parse_parametric_yaml
 from tiago_description.launch_arguments import TiagoArgs
 
+
 @dataclass(frozen=True)
 class LaunchArguments(LaunchArgumentsBase):
 
@@ -49,6 +50,7 @@ def declare_actions(launch_description: LaunchDescription, launch_args: LaunchAr
     launch_description.add_action(gravity_compensation_controller)
 
     return
+
 
 def setup_gravity_controller_configuration(context: LaunchContext):
 
@@ -75,6 +77,7 @@ def setup_gravity_controller_configuration(context: LaunchContext):
     parsed_yaml = parse_parametric_yaml(source_files=[param_file], param_rewrites=remappings)
 
     return [SetLaunchConfiguration('controller_config', parsed_yaml)]
+
 
 def generate_launch_description():
 
