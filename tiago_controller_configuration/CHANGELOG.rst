@@ -2,6 +2,16 @@
 Changelog for package tiago_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix flake8
+* Add gravity compensation support for all grippers + improve launch file
+* Fix rebase issues + add arm_motor_model to module
+* Add dependencies and parameter for motor_model
+* Add gravity compensation controller as default controller loaded inactive
+* gravity compensation controller loaded in the default controllers
+* Contributors: Aina, ileniaperrella, thomas.peyrucain
+
 4.3.0 (2024-08-07)
 ------------------
 * Use controller_type from the controllers config

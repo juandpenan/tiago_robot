@@ -2,6 +2,11 @@
 Changelog for package tiago_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add dependencies and parameter for motor_model
+* Contributors: Aina
+
 4.3.0 (2024-08-07)
 ------------------
 
