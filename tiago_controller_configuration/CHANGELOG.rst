@@ -2,8 +2,8 @@
 Changelog for package tiago_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.4.0 (2024-08-22)
+------------------
 * Fix flake8
 * Add gravity compensation support for all grippers + improve launch file
 * Fix rebase issues + add arm_motor_model to module
