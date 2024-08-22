@@ -39,6 +39,7 @@ class LaunchArguments(LaunchArgumentsBase):
     end_effector: DeclareLaunchArgument = TiagoArgs.end_effector
     ft_sensor: DeclareLaunchArgument = TiagoArgs.ft_sensor
     is_public_sim: DeclareLaunchArgument = CommonArgs.is_public_sim
+    arm_motor_model: DeclareLaunchArgument = TiagoArgs.arm_motor_model
 
 
 def generate_launch_description():
@@ -141,6 +142,16 @@ def declare_actions(
     )
 
     launch_description.add_action(arm_controller)
+
+    # Gravity compensation controller
+    gravity_compensation_controller = include_scoped_launch_py_description(
+        pkg_name="tiago_controller_configuration",
+        paths=["launch", "gravity_compensation_controller.launch.py"],
+        launch_arguments={"arm_motor_model": launch_args.arm_motor_model,
+                          "end_effector": launch_args.end_effector},
+    )
+
+    launch_description.add_action(gravity_compensation_controller)
 
     # FT Sensor
     ft_sensor_controller = GroupAction(
