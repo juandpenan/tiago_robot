@@ -2,6 +2,12 @@
 Changelog for package tiago_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Use launch file directly from base controller_configuration
+* Don't load gravity compensation in public sim
+* Contributors: David ter Kuile
+
 4.4.0 (2024-08-22)
 ------------------
 * Fix flake8

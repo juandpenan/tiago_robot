@@ -2,6 +2,12 @@
 Changelog for package tiago_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix distances for old wrist + change default wrist + typo
+* Fix distance of from the arm_7_link to arm_tool_link and the ft_sensor link placement
+* Contributors: thomas.peyrucain
+
 4.4.0 (2024-08-22)
 ------------------
 * Add dependencies and parameter for motor_model

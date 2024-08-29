@@ -2,6 +2,11 @@
 Changelog for package tiago_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Use launch file directly from base controller_configuration
+* Contributors: David ter Kuile
+
 4.4.0 (2024-08-22)
 ------------------
 * Add dependencies and parameter for motor_model
