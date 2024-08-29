@@ -2,8 +2,8 @@
 Changelog for package tiago_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.5.0 (2024-08-29)
+------------------
 * Use launch file directly from base controller_configuration
 * Contributors: David ter Kuile
 

@@ -2,8 +2,8 @@
 Changelog for package tiago_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.5.0 (2024-08-29)
+------------------
 * Fix distances for old wrist + change default wrist + typo
 * Fix distance of from the arm_7_link to arm_tool_link and the ft_sensor link placement
 * Contributors: thomas.peyrucain
