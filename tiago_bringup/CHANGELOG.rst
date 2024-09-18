@@ -2,8 +2,8 @@
 Changelog for package tiago_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+4.6.0 (2024-09-18)
+------------------
 * Add slash to node names on parameter files
 * Contributors: Noel Jimenez
 
