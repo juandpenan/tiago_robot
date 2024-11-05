@@ -105,7 +105,7 @@
   <xacro:include filename="$(find pal_urdf_utils)/urdf/materials.urdf.xacro" />
 
   <!-- Now we can start using the macros included above to define the actual robot -->
-  <xacro:base_sensors name="base" laser_model="$(arg laser_model)" sonars="true" microphone="true"/>
+  <xacro:base_sensors name="base" laser_model="$(arg laser_model)" microphone="true"/>
   <xacro:tiago_torso name="torso" parent="base_link"/>
   <xacro:head name="head" parent="torso_lift_link" camera_model="$(arg camera_model)"
 	  description_calibration_dir="$(arg description_calibration_dir)"
