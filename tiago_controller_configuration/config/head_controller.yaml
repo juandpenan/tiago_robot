@@ -1,5 +1,6 @@
 head_controller:
   ros__parameters:
+    type: joint_trajectory_controller/JointTrajectoryController
     joints:
       - head_1_joint
       - head_2_joint
@@ -7,7 +8,7 @@ head_controller:
       - position
     state_interfaces:
       - position
-
+    open_loop_control: true
     constraints:
       goal_time: 2.0
       stopped_velocity_tolerance: 5.0

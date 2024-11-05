@@ -2,6 +2,160 @@
 Changelog for package tiago_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+4.6.0 (2024-09-18)
+------------------
+
+4.5.0 (2024-08-29)
+------------------
+* Use launch file directly from base controller_configuration
+* Don't load gravity compensation in public sim
+* Contributors: David ter Kuile
+
+4.4.0 (2024-08-22)
+------------------
+* Fix flake8
+* Add gravity compensation support for all grippers + improve launch file
+* Fix rebase issues + add arm_motor_model to module
+* Add dependencies and parameter for motor_model
+* Add gravity compensation controller as default controller loaded inactive
+* gravity compensation controller loaded in the default controllers
+* Contributors: Aina, ileniaperrella, thomas.peyrucain
+
+4.3.0 (2024-08-07)
+------------------
+* Use controller_type from the controllers config
+* Contributors: Noel Jimenez
+
+4.2.21 (2024-08-05)
+-------------------
+* enable odom tf for pmb2 for public sim
+* Contributors: David ter Kuile
+
+4.2.20 (2024-07-29)
+-------------------
+* Adding open_loop_control variable to head controller
+* Contributors: vivianamorlando
+
+4.2.19 (2024-07-25)
+-------------------
+* Change parameter to arm_type
+* Contributors: thomas.peyrucain
+
+4.2.18 (2024-07-09)
+-------------------
+* Add warning for pal_module_cmake not found
+* Contributors: Noel Jimenez
+
+4.2.17 (2024-07-08)
+-------------------
+* change module name into 10\_*
+* change the bases config file for their packages config files
+* Contributors: Aina
+
+4.2.16 (2024-06-28)
+-------------------
+* Add imu sensor broadcaster
+* Contributors: davidterkuile
+
+4.2.15 (2024-06-26)
+-------------------
+* Merge branch 'dtk/move-robot-args' into 'humble-devel'
+  Change imports for robot arguments
+  See merge request robots/tiago_robot!297
+* Change imports for robot arguments
+* Contributors: David ter Kuile, davidterkuile
+
+4.2.14 (2024-06-25)
+-------------------
+* Merge branch 'dtk/fix/base-urdf' into 'humble-devel'
+  Dtk/fix/base urdf
+  See merge request robots/tiago_robot!295
+* Add imu gazebo plugin and imu sensor broadcaster
+* Move ros2 control gazebo
+* Merge branch 'fix/remove_pmb2_extra_joints' into 'humble-devel'
+  Remove casters and suspension from joint_state_broadcaster
+  See merge request robots/tiago_robot!296
+* Remove casters and suspension from joint_state_broadcaster
+* Contributors: David ter Kuile, Jordan Palacios, Noel Jimenez, davidterkuile
+
+4.2.13 (2024-06-05)
+-------------------
+* Merge branch 'feat/motions' into 'humble-devel'
+  pre-recorded_motions
+  See merge request robots/tiago_robot!292
+* fix launch ee_controller when no-ft-sensor
+* Contributors: Aina, davidterkuile
+
+4.2.12 (2024-05-10)
+-------------------
+
+4.2.11 (2024-05-09)
+-------------------
+
+4.2.10 (2024-05-09)
+-------------------
+
+4.2.9 (2024-05-07)
+------------------
+
+4.2.8 (2024-04-30)
+------------------
+* Merge branch 'omm/fix/urdf_complete_std' into 'humble-devel'
+  URDF std
+  See merge request robots/tiago_robot!278
+* Suggested changed
+* Module, joy config and restored support for tiago dual
+* Omni related checks and files
+* Suggested changes
+* Launch files moved to TIAGo family standard
+* Merge branch 'tpe/add_omni_controller' into 'humble-devel'
+  Add missing dependency for the omni_base controller
+  See merge request robots/tiago_robot!279
+* Add missing dependency for the omni_base controller
+* Contributors: Oscar, davidterkuile, thomas.peyrucain
+
+4.2.7 (2024-04-22)
+------------------
+* Merge branch 'sgg/feat/base_type_omni_base' into 'humble-devel'
+  Sgg/feat/base type omni base
+  See merge request robots/tiago_robot!273
+* Fix whitespace
+* mobile_base_controller.launch.py
+  Handle is_public_sim
+* Add param to ctor
+* Add use_sim parameter
+* Refactor avoiding if to reduce code complexity
+* Update new robot argument method
+  Update new robot argument
+  Update new robot argument
+  Remove blank lines
+* Launch joint_state_broadcaster depending on the base_type
+  Fix syntax
+  Remove redundant check
+  Remove redundant check
+* Fix syntax
+* Fix quotes in comparison
+* Parameterized mobile base type
+* Hardcoded omni_base controller
+* Contributors: Sergi Garcia, davidterkuile
+
+4.2.6 (2024-04-16)
+------------------
+* Merge branch 'feat/ros2-pipelines' into 'humble-devel'
+  added public sim config for mobile base controller
+  See merge request robots/tiago_robot!274
+* cosmetic
+* added public sim config for mobile base controller
+* Contributors: andreacapodacqua, antoniobrandi
+
+4.2.5 (2024-04-10)
+------------------
+* Add ros2controlcli dependency
+* Contributors: Noel Jimenez
+
+4.2.4 (2024-03-06)
+------------------
+
 4.2.3 (2024-02-28)
 ------------------
 

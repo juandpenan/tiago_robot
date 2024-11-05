@@ -12,89 +12,219 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+from dataclasses import dataclass
+from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import OpaqueFunction
-from launch.conditions import IfCondition, LaunchConfigurationNotEquals
-from launch.substitutions import LaunchConfiguration, PythonExpression
+from launch.actions import GroupAction, OpaqueFunction
 from launch_pal.arg_utils import read_launch_argument
-from launch_pal.include_utils import include_launch_py_description
-from launch_pal.robot_utils import get_arm, get_end_effector, get_ft_sensor, get_robot_name
+from controller_manager.launch_utils import generate_load_controller_launch_description
+from launch_pal.arg_utils import LaunchArgumentsBase
+from launch.actions import DeclareLaunchArgument
+from launch_pal.include_utils import include_scoped_launch_py_description
+from launch.substitutions import PythonExpression, LaunchConfiguration
+from launch_pal.robot_arguments import CommonArgs
+from tiago_description.launch_arguments import TiagoArgs
+from launch.conditions import (
+    LaunchConfigurationNotEquals,
+    IfCondition,
+    UnlessCondition
+)
 
 
-def declare_robot_args(context, *args, **kwargs):
+@dataclass(frozen=True)
+class LaunchArguments(LaunchArgumentsBase):
 
-    robot_name = read_launch_argument('robot_name', context)
-
-    return [get_arm(robot_name),
-            get_end_effector(robot_name),
-            get_ft_sensor(robot_name)]
-
-
-def launch_end_effector_controller(context, *args, **kwargs):
-    end_effector_robotiq_list = ['robotiq-2f-85', 'robotiq-2f-140']
-    end_effector_param = read_launch_argument('end_effector', context)
-    if (end_effector_param == 'no-end-effector'):
-        return []
-
-    if (end_effector_param in end_effector_robotiq_list):
-        end_effector_controller_launch = include_launch_py_description(
-            'pal_robotiq_controller_configuration',
-            ['launch', 'robotiq_gripper_controller.launch.py'],
-            condition=LaunchConfigurationNotEquals('arm', 'no-arm'))
-        return [end_effector_controller_launch]
-
-    end_effector = end_effector_param.replace('-', '_')
-
-    end_effector_controller_launch = include_launch_py_description(
-        end_effector + '_controller_configuration',
-        ['launch', end_effector + '_controller.launch.py'],
-        condition=LaunchConfigurationNotEquals('arm', 'no-arm'))
-    return [end_effector_controller_launch]
+    base_type: DeclareLaunchArgument = TiagoArgs.base_type
+    arm_type: DeclareLaunchArgument = TiagoArgs.arm_type
+    arm_motor_model: DeclareLaunchArgument = TiagoArgs.arm_motor_model
+    end_effector: DeclareLaunchArgument = TiagoArgs.end_effector
+    ft_sensor: DeclareLaunchArgument = TiagoArgs.ft_sensor
+    is_public_sim: DeclareLaunchArgument = CommonArgs.is_public_sim
+    use_sim_time: DeclareLaunchArgument = CommonArgs.use_sim_time
 
 
 def generate_launch_description():
-    mobile_base_controller_launch = include_launch_py_description(
-        'tiago_controller_configuration',
-        ['launch', 'mobile_base_controller.launch.py'])
 
-    joint_state_broadcaster_launch = include_launch_py_description(
-        'tiago_controller_configuration',
-        ['launch', 'joint_state_broadcaster.launch.py'])
-
-    torso_controller_launch = include_launch_py_description(
-        'tiago_controller_configuration',
-        ['launch', 'torso_controller.launch.py'])
-
-    head_controller_launch = include_launch_py_description(
-        'tiago_controller_configuration',
-        ['launch', 'head_controller.launch.py'])
-
-    arm_controller_launch = include_launch_py_description(
-        'tiago_controller_configuration',
-        ['launch', 'arm_controller.launch.py'],
-        condition=LaunchConfigurationNotEquals('arm', 'no-arm'))
-
-    ft_sensor_controller_launch = include_launch_py_description(
-        'tiago_controller_configuration',
-        ['launch', 'ft_sensor_controller.launch.py'],
-        condition=IfCondition(
-            PythonExpression(
-                ["'", LaunchConfiguration('arm'), "' != 'no-arm' and '",
-                 LaunchConfiguration('ft_sensor'), "' != 'no-ft-sensor'"]
-            )
-        ))
-
+    # Create the launch description and populate
     ld = LaunchDescription()
+    launch_arguments = LaunchArguments()
 
-    ld.add_action(get_robot_name('tiago'))
-    ld.add_action(OpaqueFunction(function=declare_robot_args))
+    launch_arguments.add_to_launch_description(ld)
 
-    ld.add_action(mobile_base_controller_launch)
-    ld.add_action(joint_state_broadcaster_launch)
-    ld.add_action(torso_controller_launch)
-    ld.add_action(head_controller_launch)
-    ld.add_action(arm_controller_launch)
-    ld.add_action(ft_sensor_controller_launch)
-    ld.add_action(OpaqueFunction(function=launch_end_effector_controller))
+    declare_actions(ld, launch_arguments)
 
     return ld
+
+
+def declare_actions(
+    launch_description: LaunchDescription, launch_args: LaunchArguments
+):
+    # Create the extra configs from the LAs
+    pkg_share_folder = get_package_share_directory(
+        "tiago_controller_configuration")
+
+    launch_description.add_action(
+        OpaqueFunction(function=launch_mobile_base_controller))
+
+    joint_state_broadcaster = GroupAction(
+        [
+            generate_load_controller_launch_description(
+                controller_name="joint_state_broadcaster",
+                controller_params_file=os.path.join(
+                    pkg_share_folder, "config", "joint_state_broadcaster.yaml"
+                ),
+            )
+        ],
+    )
+    launch_description.add_action(joint_state_broadcaster)
+
+    # IMU sensor broadcaster
+    imu_sensor_broadcaster = GroupAction(
+        [
+            generate_load_controller_launch_description(
+                controller_name='imu_sensor_broadcaster',
+                controller_params_file=os.path.join(
+                    pkg_share_folder, 'config', 'imu_sensor_broadcaster.yaml'))
+
+        ],
+    )
+    launch_description.add_action(imu_sensor_broadcaster)
+
+    # Torso controller
+    torso_controller = GroupAction(
+        [
+            generate_load_controller_launch_description(
+                controller_name="torso_controller",
+                controller_params_file=os.path.join(
+                    pkg_share_folder, "config", "torso_controller.yaml"
+                ),
+            )
+        ],
+    )
+
+    launch_description.add_action(torso_controller)
+
+    # Head controller
+    head_controller = GroupAction(
+        [
+            generate_load_controller_launch_description(
+                controller_name="head_controller",
+                controller_params_file=os.path.join(
+                    pkg_share_folder, "config", "head_controller.yaml"
+                ),
+            )
+        ],
+        forwarding=False,
+    )
+
+    launch_description.add_action(head_controller)
+
+    # Arm controller
+    arm_controller = GroupAction(
+        [
+            generate_load_controller_launch_description(
+                controller_name='arm_controller',
+                controller_params_file=os.path.join(
+                    pkg_share_folder, 'config', 'arm_controller.yaml'))
+        ],
+        forwarding=False,
+        condition=LaunchConfigurationNotEquals("arm_type", "no-arm"),
+    )
+
+    launch_description.add_action(arm_controller)
+
+    # Gravity compensation controller
+    gravity_compensation_controller = include_scoped_launch_py_description(
+        pkg_name="tiago_controller_configuration",
+        paths=["launch", "gravity_compensation_controller.launch.py"],
+        launch_arguments={"arm_motor_model": launch_args.arm_motor_model,
+                          "end_effector": launch_args.end_effector},
+        condition=UnlessCondition(LaunchConfiguration("is_public_sim"))
+    )
+
+    launch_description.add_action(gravity_compensation_controller)
+
+    # FT Sensor
+    ft_sensor_controller = GroupAction(
+        [
+            generate_load_controller_launch_description(
+                controller_name="ft_sensor_controller",
+                controller_params_file=os.path.join(
+                    pkg_share_folder, "config", "ft_sensor_controller.yaml"
+                ),
+            )
+        ],
+        forwarding=False,
+        condition=IfCondition(
+            PythonExpression(
+                [
+                    "'",
+                    LaunchConfiguration("arm_type"),
+                    "' != 'no-arm' and '",
+                    LaunchConfiguration("ft_sensor"),
+                    "' != 'no-ft-sensor'",
+                ]
+            )
+        ),
+    )
+
+    launch_description.add_action(ft_sensor_controller)
+
+    # Configure LA dependant controllers
+    launch_description.add_action(OpaqueFunction(
+        function=configure_end_effector))
+
+    return
+
+
+def launch_mobile_base_controller(context, *args, **kwargs):
+
+    base_type = read_launch_argument("base_type", context)
+    use_sim_time = read_launch_argument("use_sim_time", context)
+    is_public_sim = read_launch_argument("is_public_sim", context)
+
+    base_controller_package = base_type + "_controller_configuration"
+
+    mobile_base_controller = include_scoped_launch_py_description(
+        pkg_name=base_controller_package,
+        paths=["launch", "mobile_base_controller.launch.py"],
+        launch_arguments={
+            "use_sim_time": use_sim_time,
+            "is_public_sim": is_public_sim,
+        }
+    )
+
+    return [mobile_base_controller]
+
+
+def configure_end_effector(context, *args, **kwargs):
+
+    end_effector = read_launch_argument("end_effector", context)
+    end_effector_underscore = end_effector.replace('-', '_')
+
+    if (end_effector == 'no-end-effector'):
+        return []
+
+    if "robotiq" in end_effector:
+        ee_pkg_name = "pal_robotiq_controller_configuration"
+        ee_launch_file = "robotiq_gripper_controller.launch.py"
+    else:
+        ee_pkg_name = f"{end_effector_underscore}_controller_configuration"
+        ee_launch_file = f"{end_effector_underscore}_controller.launch.py"
+
+    end_effector_controller = include_scoped_launch_py_description(
+        pkg_name=ee_pkg_name,
+        paths=['launch', ee_launch_file],
+        condition=IfCondition(
+            PythonExpression(
+                [
+                    "'",
+                    LaunchConfiguration("arm_type"),
+                    "' != 'no-arm'",
+                ]
+            )
+        ),
+    )
+
+    return [end_effector_controller]
